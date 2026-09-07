@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#075f43">
+<title>UNIKENYA — Super Citizen</title>
+<style>
+:root{--g:#075f43;--g2:#0a7a56;--bg:#f3f7f5;--ink:#10221d;--muted:#6c7b76;--line:#dce7e3;--white:#fff;--mint:#e8f4ef;--gold:#e5b94c;--danger:#c94d59}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.top{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;padding:15px 16px 16px;position:sticky;top:0;z-index:30;box-shadow:0 3px 16px #0002}.row{display:flex;align-items:center;justify-content:space-between}.brand{display:flex;gap:10px;align-items:center}.flag{width:45px;height:45px;border-radius:14px;background:#ffffff22;display:grid;place-items:center;font-size:27px}.brand h1{margin:0;font-size:25px;font-weight:950;letter-spacing:.7px}.brand p{margin:2px 0 0;font-size:11px;font-weight:750;opacity:.9}.head-actions{display:flex;gap:7px}.head-btn{border:0;background:#ffffff1e;color:#fff;width:42px;height:42px;border-radius:13px;font-size:19px}
+main{max-width:850px;margin:auto;padding:16px 14px 108px}.screen{display:none}.screen.active{display:block}
+.hero{background:linear-gradient(135deg,#fff,#f8fcfa);border:1px solid var(--line);border-radius:27px;padding:20px;box-shadow:0 5px 18px #00000008}.eyebrow{font-size:11px;color:var(--g);font-weight:950;letter-spacing:.8px}.hero h2{font-size:28px;margin:5px 0;line-height:1.1}.hero p{color:var(--muted);margin:0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:11px}.stat b{display:block;font-size:19px}.stat span{font-size:10px;color:var(--muted)}
+.title{display:flex;align-items:center;justify-content:space-between;margin:20px 2px 10px}.title h3{margin:0;font-size:18px}.title button{border:0;background:none;color:var(--g);font-weight:900}.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.q{background:#fff;border:1px solid var(--line);border-radius:19px;padding:14px;min-height:116px;box-shadow:0 3px 10px #00000006}.ico{width:41px;height:41px;background:var(--mint);border-radius:13px;display:grid;place-items:center;font-size:20px;margin-bottom:9px}.q b{font-size:13px}.q p{font-size:10.5px;color:var(--muted);margin:4px 0 0;line-height:1.35}
+.news-scroll{display:flex;gap:11px;overflow:auto;padding:2px 1px 8px;scrollbar-width:none}.news-card{flex:0 0 250px;background:#fff;border:1px solid var(--line);border-radius:19px;overflow:hidden;box-shadow:0 4px 13px #00000008}.news-card img{width:100%;height:125px;object-fit:cover;display:block}.news-body{padding:12px}.news-body small{color:var(--g);font-weight:900}.news-body b{display:block;margin:5px 0;font-size:13px;line-height:1.28}.news-body a{color:var(--g);font-weight:900;font-size:11px;text-decoration:none}.news-item img{width:100%;height:170px;object-fit:cover;border-radius:16px 16px 0 0;display:block}.news-item{overflow:hidden}.news-fallback-img{background:linear-gradient(135deg,#087f5b,#cdeee4);display:flex;align-items:center;justify-content:center;font-size:44px;color:#fff}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px;margin:9px 0}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}.feature{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px}.feature b{display:block;margin-bottom:4px}.feature span{font-size:11px;color:var(--muted)}.service{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid var(--line);border-radius:17px;padding:13px;margin:8px 0}.sico{width:42px;height:42px;border-radius:12px;background:var(--mint);display:grid;place-items:center;font-size:20px}.service-info{flex:1}.service-info b{display:block;font-size:13px}.service-info span{font-size:11px;color:var(--muted)}.open{border:0;background:var(--g);color:#fff;border-radius:10px;padding:9px 11px;font-size:11px;font-weight:900}
+.input{width:100%;padding:13px;border:1px solid #cbd9d4;border-radius:13px;outline:none;background:#fff}.input:focus{border-color:var(--g)}label{font-size:12px;font-weight:850;display:block;margin:10px 0 5px}.primary{width:100%;border:0;background:var(--g);color:#fff;border-radius:13px;padding:13px;font-weight:900;margin-top:10px}.secondary{width:100%;border:0;background:var(--mint);color:var(--g);border-radius:13px;padding:12px;font-weight:900;margin-top:8px}.danger{width:100%;border:0;background:#fdecef;color:#a82f3b;border-radius:13px;padding:12px;font-weight:900;margin-top:8px}
+.mapbox{background:#fff;border:1px solid var(--line);border-radius:21px;padding:9px;overflow:hidden}.map{width:100%;height:285px;border:0;border-radius:17px}.map-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px}.map-actions button{border:0;border-radius:11px;background:var(--mint);color:var(--g);font-size:11px;font-weight:900;padding:10px 4px}
+.chat{background:#fff;border:1px solid var(--line);border-radius:21px;padding:13px;min-height:500px;display:flex;flex-direction:column}.messages{flex:1;overflow:auto;min-height:350px}.msg{max-width:87%;padding:11px 13px;border-radius:17px;background:#edf4f1;margin:8px 0;font-size:13px;line-height:1.42}.msg.me{margin-left:auto;background:var(--g);color:#fff}.chatbar{display:flex;gap:7px;margin-top:8px}.chatbar input{flex:1}.chatbar button{border:0;background:var(--g);color:#fff;border-radius:12px;width:51px}.suggestions{display:flex;gap:6px;overflow:auto;padding:6px 0}.chip{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 9px;font-size:10px;font-weight:800;color:var(--g)}
+.badge{background:var(--mint);color:var(--g);font-size:10px;font-weight:900;padding:5px 8px;border-radius:99px}.empty{text-align:center;color:var(--muted);padding:23px}
+.bottom{position:fixed;bottom:0;left:0;right:0;height:77px;background:#fff;border-top:1px solid var(--line);z-index:40;display:flex;justify-content:space-around;padding-bottom:env(safe-area-inset-bottom)}.nav{border:0;background:none;color:#7a8984;min-width:55px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9px;font-weight:900}.nav.active{color:var(--g)}.nav span{font-size:20px;line-height:20px}
+.auth{min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at top,#e5f4ee,#f3f7f5 45%)}.auth-card{width:min(430px,100%);background:#fff;border:1px solid var(--line);border-radius:28px;padding:23px;box-shadow:0 15px 40px #00000012}.auth-logo{display:flex;align-items:center;gap:11px;margin-bottom:15px}.auth-logo .flag{background:var(--mint)}.auth-logo h1{margin:0;color:var(--g);font-size:27px}.auth-logo p{margin:2px 0;color:var(--muted);font-size:11px}.tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--mint);border-radius:13px;padding:4px;margin-bottom:12px}.tab{border:0;background:none;border-radius:10px;padding:9px;font-weight:900;color:var(--g)}.tab.active{background:#fff;box-shadow:0 2px 8px #00000009}.legal{font-size:10px;color:var(--muted);line-height:1.4;margin-top:11px}
+.modal{position:fixed;inset:0;background:#0008;z-index:80;display:none;align-items:flex-end}.modal.show{display:flex}.sheet{width:100%;background:#fff;border-radius:27px 27px 0 0;padding:20px;max-height:88vh;overflow:auto}.close{float:right;border:0;background:#eee;border-radius:10px;padding:7px 11px}.toast{display:none;position:fixed;bottom:93px;left:50%;transform:translateX(-50%);background:#10221d;color:#fff;border-radius:13px;padding:10px 14px;font-size:12px;z-index:100}
+.home-command{margin-top:14px;padding:15px;border-radius:22px;background:linear-gradient(135deg,#063b2c,#0b7b55);color:#fff;box-shadow:0 10px 25px #00000014}.home-command-label{font-size:10px;font-weight:950;letter-spacing:.8px;opacity:.9}.home-search{display:flex;gap:7px;margin-top:9px}.home-search input{flex:1;min-width:0;border:0;border-radius:14px;padding:13px 14px;font-size:14px;outline:0}.home-search button{border:0;border-radius:12px;background:#ffffff1e;color:#fff;width:44px;font-size:18px}.home-hints{display:flex;gap:6px;overflow:auto;margin-top:8px}.home-hints button{white-space:nowrap;border:1px solid #ffffff35;background:#ffffff14;color:#fff;border-radius:99px;padding:7px 10px;font-size:10px;font-weight:850}.quick-four{grid-template-columns:repeat(2,1fr)}.q-feature{min-height:105px}.category-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.category{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:11px;min-height:67px;box-shadow:0 3px 10px #00000005}.category>span{width:38px;height:38px;flex:0 0 38px;border-radius:12px;background:var(--mint);display:grid;place-items:center;font-size:19px}.category b{display:block;font-size:11.5px}.category small{display:block;color:var(--muted);font-size:9.5px;line-height:1.25;margin-top:2px}.personal-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.personal{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px}.personal span{font-size:20px}.personal b{display:block;font-size:11.5px;margin-top:5px}.personal small{display:block;color:var(--muted);font-size:9.5px;margin-top:2px}.dark .home-command{box-shadow:none}.dark .category,.dark .personal{background:#101c18}
+@media(min-width:650px){.quick{grid-template-columns:repeat(3,1fr)}.news-card{flex-basis:275px}}
+
+/* Safaricom dashboard */
+.safaricom-screen{position:relative;background:linear-gradient(180deg,#075f43e8,#075f43cc),url("safaricom-bg.svg"),url("https://db8n10t56pnoz.cloudfront.net/Pictures/2000xAny/1/9/1/6191_vfw205ttmpesa_149462.jpg") center/cover fixed;padding:10px;border-radius:28px;min-height:70vh}.safaricom-screen .hero,.safaricom-screen .card,.safaricom-screen .feature{background:#ffffffef;backdrop-filter:blur(4px)}.saf-tabs{display:flex;gap:7px;overflow:auto;padding:5px 0 9px}.saf-tab{white-space:nowrap;border:1px solid #ffffff66;background:#ffffffdd;color:var(--g);border-radius:99px;padding:9px 12px;font-size:11px;font-weight:950}.saf-tab.active{background:var(--g);color:#fff}.saf-offer{background:#fff;border:1px solid var(--line);border-radius:18px;padding:13px;box-shadow:0 3px 10px #00000009}.saf-offer b{display:block;font-size:13px}.saf-offer .meta{display:block;color:var(--muted);font-size:10.5px;line-height:1.4;margin:5px 0}.saf-price{font-weight:950;color:var(--g);font-size:15px}.saf-source{font-size:9px;color:var(--muted)}
+/* UNIKENYA Discovery & Culture */
+.discovery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.discovery-card{background:#fff;border:1px solid var(--line);border-radius:19px;padding:14px;min-height:125px;box-shadow:0 3px 10px #00000006}.discovery-card .big{font-size:27px;margin-bottom:7px}.discovery-card b{font-size:13px;display:block}.discovery-card span{display:block;color:var(--muted);font-size:10.5px;line-height:1.35;margin-top:4px}.pillrow{display:flex;gap:6px;overflow:auto;padding:5px 0 8px}.pill{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:99px;padding:8px 11px;font-size:10px;font-weight:900;color:var(--g)}.table-wrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:18px}.league-table{width:100%;border-collapse:collapse;font-size:11px;min-width:480px}.league-table th{background:var(--mint);color:var(--g);text-align:left;padding:9px}.league-table td{padding:9px;border-top:1px solid var(--line)}.league-table td:not(:first-child),.league-table th:not(:first-child){text-align:center}.rank{font-weight:950;color:var(--g)}.trend{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}.trend:last-child{border-bottom:0}.trend-icon{width:40px;height:40px;border-radius:12px;background:var(--mint);display:grid;place-items:center;font-size:19px}.trend-info{flex:1}.trend-info b{display:block;font-size:12px}.trend-info span{font-size:10px;color:var(--muted)}.trend-up{font-size:10px;font-weight:950;color:var(--g)}.small-note{font-size:10px;color:var(--muted);line-height:1.45}.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#19a974;margin-right:5px}.section-actions{display:flex;gap:7px;margin-top:10px}.section-actions button{flex:1}.wide-btn{border:0;background:var(--g);color:#fff;border-radius:12px;padding:11px;font-size:11px;font-weight:900}.outline-btn{border:1px solid var(--line);background:#fff;color:var(--g);border-radius:12px;padding:11px;font-size:11px;font-weight:900}.music-card{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid var(--line);border-radius:17px;padding:12px;margin:8px 0}.cover{width:48px;height:48px;border-radius:13px;background:linear-gradient(135deg,var(--g),#c8e9dd);display:grid;place-items:center;font-size:22px}.music-info{flex:1}.music-info b{display:block;font-size:12px}.music-info span{display:block;font-size:10px;color:var(--muted);margin-top:3px}.play{border:0;background:var(--g);color:#fff;border-radius:10px;padding:8px 10px;font-size:10px;font-weight:900}.celebrity{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px;margin:7px 0}.avatar{width:42px;height:42px;border-radius:50%;background:var(--mint);display:grid;place-items:center;font-size:18px}.celebrity b{font-size:12px}.celebrity span{display:block;font-size:10px;color:var(--muted)}
+@media(min-width:650px){.discovery-grid{grid-template-columns:repeat(3,1fr)}}
+.source-tag{display:inline-block;margin-top:7px;font-size:10px;font-weight:800;letter-spacing:.4px;color:#087552;background:#e8f7f1;padding:5px 7px;border-radius:999px}.small-note{color:var(--muted);font-size:12px;line-height:1.5}.news-list{display:grid;gap:10px}.news-item{background:#fff;border:1px solid var(--line);border-radius:18px;padding:13px;box-shadow:0 3px 12px #00000008}.news-item .meta{display:flex;justify-content:space-between;gap:8px;align-items:center;color:var(--muted);font-size:10px}.news-item h3{font-size:15px;line-height:1.3;margin:7px 0}.news-item p{font-size:11px;color:var(--muted);margin:0 0 9px}.news-item a{color:var(--g);font-weight:900;text-decoration:none;font-size:11px}.source-badge{display:inline-block;padding:4px 7px;border-radius:999px;background:#e9f6f1;color:var(--g);font-weight:900}.news-loading{padding:20px;text-align:center;color:var(--muted)}
+
+/* UNIKENYA Mega Tools + Dark Theme */
+body.dark{--bg:#0b1411;--ink:#edf7f2;--muted:#a8bbb3;--line:#263b34;--white:#101c18;--mint:#15382c}
+body.dark .hero,body.dark .card,body.dark .q,body.dark .feature,body.dark .service,body.dark .news-card,body.dark .news-item,body.dark .discovery-card,body.dark .music-card,body.dark .celebrity,body.dark .input,body.dark .chip,body.dark .pill,body.dark .outline-btn,body.dark .bottom,body.dark .sheet,body.dark .auth-card,body.dark .stat,body.dark .table-wrap{background:#101c18;color:var(--ink);border-color:var(--line)}
+body.dark .hero{background:linear-gradient(135deg,#101c18,#13241e)}body.dark .top{box-shadow:0 3px 16px #0008}body.dark .bottom{background:#0e1915}body.dark .msg{background:#172922}body.dark .modal{background:#000b}body.dark .close{background:#26342f;color:#fff}body.dark .input{color:var(--ink)}body.dark .news-body a,body.dark .news-item a{color:#67d7ad}
+.theme-toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px;border:1px solid var(--line);border-radius:16px;background:var(--mint);margin:10px 0}.switch{width:48px;height:28px;border-radius:99px;border:0;background:#82938d;position:relative}.switch:after{content:'';position:absolute;width:22px;height:22px;top:3px;left:3px;background:#fff;border-radius:50%;transition:.2s}.switch.on{background:var(--g)}.switch.on:after{left:23px}
+.tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.tool-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px}.tool-card b{display:block;font-size:13px}.tool-card p{font-size:10.5px;color:var(--muted);line-height:1.35}.tool-card button{margin-top:7px}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}.calc-grid button{padding:13px 5px;border:0;border-radius:12px;background:var(--mint);color:var(--g);font-weight:900}.calc-display{font-size:25px;text-align:right;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--bg);overflow:auto}
+@media(min-width:650px){.tool-grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<script src="config.js"></script>
+
+<div id="auth" class="auth">
+  <div class="auth-card">
+    <div class="auth-logo"><div class="flag">🇰🇪</div><div><h1>UNIKENYA</h1><p>Super Citizen Platform</p></div></div>
+    <div class="tabs"><button id="loginTab" class="tab active" onclick="authMode('login')">Login</button><button id="regTab" class="tab" onclick="authMode('register')">Create account</button></div>
+    <div id="loginForm">
+      <label>Email</label><input id="loginEmail" class="input" type="email" placeholder="you@example.com">
+      <label>Password</label><input id="loginPass" class="input" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')login()">
+      <button class="primary" onclick="login()">Login</button>
+      <button class="secondary" onclick="demoLogin()">Enter Demo Dashboard</button>
+    </div>
+    <div id="regForm" class="hidden">
+      <label>Full name</label><input id="regName" class="input" placeholder="Your name">
+      <label>Email</label><input id="regEmail" class="input" type="email" placeholder="you@example.com">
+      <label>Password</label><input id="regPass" class="input" type="password" placeholder="Create a password">
+      <button class="primary" onclick="register()">Create account</button>
+    </div>
+    <p class="legal">UNIKENYA is an independent citizen-assistance interface. Official government transactions open the responsible agency's official portal. Sensitive government records require authorized integrations.</p>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+<header class="top"><div class="row"><div class="brand"><div class="flag">🇰🇪</div><div><h1>UNIKENYA</h1><p>Super Citizen Platform</p></div></div><div class="head-actions"><button class="head-btn" onclick="go('ai')">✨</button><button class="head-btn" onclick="notifications()">🔔</button><button class="head-btn" onclick="openSettings()">⚙️</button></div></div></header>
+
+<main>
+<section id="home" class="screen active">
+<div class="hero"><div class="eyebrow">YOUR CITIZEN COMMAND CENTRE</div><h2 id="greet">Welcome, Citizen.</h2><p>Services, information, opportunities and everyday tools for life in Kenya.</p><div class="stats"><div class="stat"><b>20K+</b><span>Gov services ecosystem</span></div><div class="stat"><b id="appCount">0</b><span>Saved applications</span></div><div class="stat"><b>24/7</b><span>Digital access</span></div></div></div>
+
+<div class="home-command">
+  <div class="home-command-label">ONE SEARCH • ONE APP</div>
+  <div class="home-search"><input id="homeSearch" placeholder="What do you need today?" onkeydown="if(event.key==='Enter')homeSearchNow()"><button onclick="oneVoice()">🎙️</button><button onclick="homeSearchNow()">⌕</button></div>
+  <div class="home-hints"><button onclick="homeAsk('Find me a job in Kenya')">💼 Jobs</button><button onclick="homeAsk('Find a hospital near me')">🏥 Health</button><button onclick="homeAsk('Help me with M-PESA or Safaricom')">📱 M-PESA</button><button onclick="homeAsk('Find government services')">🏛️ Government</button></div>
+</div>
+
+<div class="title"><h3>⚡ Quick access</h3><button onclick="go('one')">Explore all</button></div>
+<div class="quick quick-four">
+ <div class="q q-feature" onclick="go('one')"><div class="ico">🇰🇪</div><b>UNIKENYA ONE</b><p>Your complete command centre</p></div>
+ <div class="q q-feature" onclick="go('ai')"><div class="ico">✨</div><b>Ask Kim</b><p>AI help for almost anything</p></div>
+ <div class="q q-feature" onclick="oneEmergency()"><div class="ico">🚨</div><b>Emergency</b><p>999 / 112, nearby help & location</p></div>
+ <div class="q q-feature" onclick="go('safaricom')"><div class="ico">📱</div><b>Safaricom</b><p>Bundles, offers & M-PESA checkout</p></div>
+</div>
+
+<div class="title"><h3>🇰🇪 Citizen services</h3><button onclick="go('services')">View all</button></div>
+<div class="category-grid">
+ <div class="category" onclick="go('services')"><span>🏛️</span><div><b>Government</b><small>eCitizen • KRA • NTSA • SHA • HELB</small></div></div>
+ <div class="category" onclick="go('jobs')"><span>💼</span><div><b>Jobs & Career</b><small>Jobs • internships • CV • interviews</small></div></div>
+ <div class="category" onclick="go('schools')"><span>📚</span><div><b>Education</b><small>Schools • courses • scholarships • tutoring</small></div></div>
+ <div class="category" onclick="go('money')"><span>💰</span><div><b>Money</b><small>Bills • budgeting • savings • finance</small></div></div>
+ <div class="category" onclick="go('health')"><span>🏥</span><div><b>Health & Safety</b><small>Hospitals • pharmacies • emergency</small></div></div>
+ <div class="category" onclick="go('markets')"><span>📈</span><div><b>Markets</b><small>Food • fuel • forex • prices</small></div></div>
+ <div class="category" onclick="go('map')"><span>📍</span><div><b>Maps & Nearby</b><small>Places • ATMs • fuel • directions</small></div></div>
+ <div class="category" onclick="go('tools')"><span>🧰</span><div><b>Tools</b><small>Calculators • documents • planners</small></div></div>
+ <div class="category" onclick="go('discover')"><span>🔥</span><div><b>Kenya Now</b><small>News • music • trends • culture</small></div></div>
+ <div class="category" onclick="go('football')"><span>⚽</span><div><b>Sports</b><small>Football • fixtures • results • tables</small></div></div>
+ <div class="category" onclick="go('one')"><span>🛒</span><div><b>Marketplace</b><small>Buy • sell • compare • discover</small></div></div>
+ <div class="category" onclick="go('one')"><span>🌾</span><div><b>Farming & Business</b><small>Farming • business • planning • markets</small></div></div>
+</div>
+
+<div class="title"><h3>🔐 Your space</h3><button onclick="go('profile')">Profile</button></div>
+<div class="personal-grid">
+ <div class="personal" onclick="go('apps')"><span>📄</span><b>My Applications</b><small>Track saved applications</small></div>
+ <div class="personal" onclick="go('one')"><span>⭐</span><b>Saved Items</b><small>Jobs, places, services & more</small></div>
+ <div class="personal" onclick="go('one')"><span>🔔</span><b>Smart Alerts</b><small>Jobs, prices, weather & reminders</small></div>
+ <div class="personal" onclick="openSettings()"><span>⚙️</span><b>Settings</b><small>Theme, privacy & preferences</small></div>
+</div>
+
+<div class="title"><h3>🇰🇪 Kenya News</h3><button onclick="go('news')">All news</button></div>
+<div id="homeNews" class="news-scroll"><div class="card"><b>Loading today's headlines…</b><p style="color:var(--muted)">UNIKENYA will refresh trusted public news feeds automatically.</p></div></div>
+</section>
+
+<section id="news" class="screen"><div class="hero"><div class="eyebrow">KENYA NOW • DAILY UPDATE</div><h2>📰 Kenya News</h2><p>Fresh headlines from public news feeds and official newsroom pages. UNIKENYA shows headlines and short metadata, then links to the publisher for the full story.</p><div class="section-actions"><button class="wide-btn" onclick="refreshNews()">↻ Refresh today's news</button><button class="outline-btn" onclick="newsSources()">Sources</button></div></div><div class="pillrow"><button class="pill" onclick="filterNews('All')">All</button><button class="pill" onclick="filterNews('National')">National</button><button class="pill" onclick="filterNews('Business')">Business</button><button class="pill" onclick="filterNews('Sports')">Sports</button><button class="pill" onclick="filterNews('Politics')">Politics</button><button class="pill" onclick="filterNews('Entertainment')">Entertainment</button><button class="pill" onclick="filterNews('World')">World</button></div><div id="newsStatus" class="card" style="margin-bottom:12px"><b>Today's newsroom feed</b><p style="color:var(--muted)">Checking for new headlines…</p></div><div id="newsList" class="news-list"></div></section>
+
+<section id="services" class="screen"><div class="hero"><div class="eyebrow">OFFICIAL ACCESS</div><h2>Government Services</h2><p>Open the official service provider. UNIKENYA does not pretend to be a government database.</p></div><div id="serviceList"></div></section>
+
+<section id="apps" class="screen"><div class="hero"><div class="eyebrow">MY ACTIVITY</div><h2>Applications</h2><p>Save references and track what you have started in UNIKENYA.</p><button class="primary" onclick="newApp()">＋ Save application</button></div><div id="appsList"></div></section>
+
+<section id="ai" class="screen"><div class="hero"><div class="eyebrow">KIM • POWERED BY OPENAI</div><h2>Ask Kim</h2><p>Ask for help choosing services, understanding forms, finding the right official portal, drafting a letter, or planning a task.</p></div>
+<div class="suggestions"><button class="chip" onclick="quickAI('How do I get a Kenyan passport?')">Passport</button><button class="chip" onclick="quickAI('How can I apply for HELB?')">HELB</button><button class="chip" onclick="quickAI('Where can I report a public complaint?')">Complaint</button><button class="chip" onclick="quickAI('I need a hospital near me')">Hospital</button><button class="chip" onclick="quickAI('Help me find a job')">Jobs</button><button class="chip" onclick="quickAI('Explain Kenya football to me')">Football</button><button class="chip" onclick="quickAI('What is trending in Kenya today?')">Trending</button><button class="chip" onclick="quickAI('Explain the latest Kenya market trends')">Markets</button></div>
+<div class="chat"><div id="messages" class="messages"><div class="msg">Hi 👋 I’m Kim. I’m the AI assistant inside UNIKENYA. Ask me anything — I can explain things, reason through problems, help with Kenyan services, analyse data, draft documents, and guide you to official sources.</div></div><div class="chatbar"><input id="aiInput" class="input" placeholder="Ask Kim anything…" onkeydown="if(event.key==='Enter')askAI()"><button onclick="askAI()">➤</button></div></div></section>
+
+<section id="map" class="screen"><div class="hero"><div class="eyebrow">DISCOVER KENYA</div><h2>Kenya Map</h2><p>Explore Kenya and search nearby places.</p></div><div class="card"><label>Search a place</label><input id="mapSearch" class="input" placeholder="e.g. hospitals in Nairobi"><button class="primary" onclick="maps($('mapSearch').value||'Kenya')">Search map</button></div><div class="mapbox"><iframe class="map" src="https://www.openstreetmap.org/export/embed.html?bbox=33.8%2C-4.8%2C41.9%2C5.3&layer=mapnik"></iframe><div class="map-actions"><button onclick="maps('hospitals')">🏥 Hospitals</button><button onclick="maps('police stations')">👮 Police</button><button onclick="maps('schools')">🎓 Schools</button></div></div></section>
+
+<section id="traffic" class="screen"><div class="hero"><div class="eyebrow">TRAVEL</div><h2>Traffic & Directions</h2><p>Use live map navigation for current road conditions and routing.</p></div><div class="card"><label>Destination</label><input id="destination" class="input" placeholder="e.g. Kenyatta National Hospital"><button class="primary" onclick="directions()">Open directions</button><button class="secondary" onclick="traffic('Nairobi traffic')">Check Nairobi traffic</button></div><div class="grid2"><div class="feature"><b>🚗 Drive</b><span>Live routing via Google Maps</span></div><div class="feature"><b>🚌 Public transport</b><span>Use map transit options where available</span></div></div></section>
+
+<section id="schools" class="screen"><div class="hero"><div class="eyebrow">EDUCATION</div><h2>Schools & Learning</h2><p>Find schools and learning institutions using map search and official education resources.</p></div><div class="card"><label>Location</label><input id="schoolPlace" class="input" placeholder="e.g. Murang'a, Kisumu, Nairobi"><div class="map-actions"><button onclick="maps('primary schools near '+($('schoolPlace').value||'Kenya'))">Primary</button><button onclick="maps('secondary schools near '+($('schoolPlace').value||'Kenya'))">Secondary</button><button onclick="maps('universities near '+($('schoolPlace').value||'Kenya'))">Universities</button></div><button class="secondary" onclick="maps('TVET near '+($('schoolPlace').value||'Kenya'))">TVET</button></div><div class="card"><b>Official education access</b><p style="color:var(--muted);font-size:12px">Use Government Services for HELB and official education portals.</p></div></section>
+
+<section id="health" class="screen"><div class="hero"><div class="eyebrow">HEALTH</div><h2>Health & Emergency</h2><p>For emergencies, contact the appropriate emergency service. Do not use UNIKENYA for diagnosis or urgent treatment.</p></div><div class="grid2"><div class="feature"><b>🚑 Emergency</b><span>Call your local emergency service or go to the nearest emergency department.</span></div><div class="feature"><b>🏥 Find hospital</b><span>Search hospitals near your location.</span><button class="secondary" onclick="maps('hospitals near me')">Find</button></div><div class="feature"><b>💊 Pharmacy</b><span>Find pharmacies nearby.</span><button class="secondary" onclick="maps('pharmacies near me')">Find</button></div><div class="feature"><b>🩺 Health info</b><span>Ask the AI for general information, not diagnosis.</span><button class="secondary" onclick="go('ai')">Ask AI</button></div></div></section>
+
+<section id="jobs" class="screen"><div class="hero"><div class="eyebrow">OPPORTUNITIES</div><h2>Jobs & Opportunities</h2><p>Find careers, internships, scholarships and public programmes through official sources.</p></div><div class="service"><div class="sico">💼</div><div class="service-info"><b>Public Service Commission</b><span>Official public-service opportunities</span></div><button class="open" onclick="window.open('https://psc.ecitizen.go.ke/','_blank')">Open</button></div><div class="service"><div class="sico">💻</div><div class="service-info"><b>ICT Authority / DigiTalent</b><span>Digital skills and talent programmes</span></div><button class="open" onclick="window.open('https://icta.go.ke/','_blank')">Open</button></div><div class="service"><div class="sico">🎓</div><div class="service-info"><b>HELB</b><span>Student funding and related services</span></div><button class="open" onclick="window.open('https://helb.ecitizen.go.ke/auth/login','_blank')">Open</button></div></section>
+
+<section id="money" class="screen"><div class="hero"><div class="eyebrow">MONEY & BILLS</div><h2>Money & Bills</h2><p>Use official portals for taxes, utilities and government payments.</p></div><div id="moneyList"></div></section>
+
+<section id="backends" class="screen"><div class="hero"><div class="eyebrow">ARCHITECTURE</div><h2>Legal Backends</h2><p>Each sensitive domain is mapped to the responsible official agency. Private integrations require authorization, security controls and proper data-protection compliance.</p></div><div id="backendList"></div></section>
+
+<section id="rights" class="screen"><div class="hero"><div class="eyebrow">TRUST & SAFETY</div><h2>Your Rights</h2><p>Quick access to privacy, complaints, oversight and official information resources.</p></div><div id="rightsList"></div></section>
+
+<section id="discover" class="screen">
+<div class="hero"><div class="eyebrow">KENYA NOW</div><h2>Trending Kenya</h2><p>One place for music, artists, celebrities, entertainment, culture and what people are talking about.</p></div>
+<div class="pillrow"><button class="pill" onclick="trendTab('music')">🎵 Music</button><button class="pill" onclick="trendTab('people')">⭐ People</button><button class="pill" onclick="trendTab('news')">📰 News</button><button class="pill" onclick="trendTab('culture')">🇰🇪 Culture</button></div>
+<div id="trendMusic">
+<div class="title"><h3>🎵 Kenyan music discovery</h3><button onclick="openMusicCharts()">Charts →</button></div>
+<div class="music-card"><div class="cover">🎧</div><div class="music-info"><b>Kenya Top Songs</b><span>Discover the songs currently charting in Kenya</span></div><button class="play" onclick="openMusicCharts()">Listen</button></div>
+<div class="music-card"><div class="cover">🔥</div><div class="music-info"><b>Trending Kenyan artists</b><span>Find current artist trends on major music platforms</span></div><button class="play" onclick="openMusicCharts()">Explore</button></div>
+<div class="music-card"><div class="cover">▶️</div><div class="music-info"><b>Kenyan YouTube music</b><span>Open the latest Kenya music discovery feed</span></div><button class="play" onclick="window.open('https://www.youtube.com/results?search_query=Kenyan+music+trending','_blank')">Open</button></div>
+</div>
+<div class="title"><h3>⭐ Public figures & entertainment</h3><button onclick="window.open('https://trends.google.com/trending?geo=KE','_blank')">Live trends →</button></div>
+<div class="celebrity"><div class="avatar">🎤</div><div><b>Artists & musicians</b><span>Track rising searches and releases without hard-coding a fake ranking.</span></div></div>
+<div class="celebrity"><div class="avatar">🎬</div><div><b>Actors & creators</b><span>Discover what's trending across Kenyan entertainment.</span></div></div>
+<div class="celebrity"><div class="avatar">🏆</div><div><b>Sports personalities</b><span>Connect entertainment trends with football and other sports.</span></div></div>
+<div class="section-actions"><button class="wide-btn" onclick="window.open('https://trends.google.com/trending?geo=KE','_blank')">See Google Kenya Trends</button><button class="outline-btn" onclick="openMusicCharts()">Music charts</button></div>
+</section>
+
+<section id="football" class="screen">
+<div class="hero"><div class="eyebrow">SPORTS HUB</div><h2>Kenyan Football</h2><p>Follow Kenyan football, fixtures, results and tables. Live feeds can be connected to an authorised sports-data provider.</p></div>
+<div class="pillrow"><button class="pill" onclick="openFKF()">🇰🇪 FKF</button><button class="pill" onclick="openFootballSearch('FKF Premier League fixtures')">📅 Fixtures</button><button class="pill" onclick="openFootballSearch('Kenya football results')">⚽ Results</button><button class="pill" onclick="openFootballSearch('Kenya football news')">📰 News</button></div>
+<div class="title"><h3>🏆 FKF Premier League table</h3><span class="badge">Live-ready</span></div>
+<div class="table-wrap"><table class="league-table"><thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr></thead><tbody>
+<tr><td class="rank">1</td><td>Gor Mahia</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td class="rank">2</td><td>Kenya Police</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td class="rank">3</td><td>Shabana</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td class="rank">4</td><td>Bandari</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>5</td><td>Kakamega Homeboyz</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>6</td><td>Tusker</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<p class="small-note">Table positions above are a display template, not a claim of live standings. When a live FKF/sports-data feed is connected, UNIKENYA should replace the rows and timestamp the update.</p>
+<div class="section-actions"><button class="wide-btn" onclick="openFKF()">Open FKF</button><button class="outline-btn" onclick="openFootballSearch('FKF Premier League table')">Find latest table</button></div>
+<div class="title"><h3>🌍 Other football</h3></div><div class="grid2"><div class="feature"><b>🏴 Premier League</b><span>Fixtures, results and standings</span><button class="secondary" onclick="openFootballSearch('Premier League table')">Open</button></div><div class="feature"><b>🏆 Champions League</b><span>European football coverage</span><button class="secondary" onclick="openFootballSearch('Champions League fixtures')">Open</button></div></div>
+</section>
+
+<section id="markets" class="screen">
+<div class="hero"><div class="eyebrow">KENYA DATA</div><h2>Markets & Price Watch</h2><p>Track everyday indicators and connect verified feeds for live prices.</p></div>
+<div class="discovery-grid"><div class="discovery-card"><div class="big">🛒</div><b>Market prices</b><span>Live official market observations appear below.</span><button class="secondary" onclick="loadMarketData('market')">Refresh prices</button></div><div class="discovery-card"><div class="big">⛽</div><b>Fuel prices</b><span>EPRA prices appear directly in UNIKENYA.</span><button class="secondary" onclick="loadMarketData('fuel')">Refresh fuel</button></div><div class="discovery-card"><div class="big">💱</div><b>Forex</b><span>CBK KES rates appear directly in UNIKENYA.</span><button class="secondary" onclick="loadMarketData('forex')">Refresh forex</button></div><div class="discovery-card"><div class="big">🏠</div><b>Housing</b><span>KNBS housing-cost indicator appears directly in UNIKENYA.</span><button class="secondary" onclick="loadMarketData('housing')">Refresh housing</button></div><div class="discovery-card"><div class="big">📊</div><b>Inflation</b><span>Latest KNBS CPI/inflation appears directly in UNIKENYA.</span><button class="secondary" onclick="loadMarketData('inflation')">Refresh inflation</button></div><div class="discovery-card"><div class="big">🌾</div><b>Agriculture</b><span>KAMIS agricultural prices appear directly in UNIKENYA.</span><button class="secondary" onclick="loadMarketData('agriculture')">Refresh agriculture</button></div></div>
+<div class="title"><h3>🛍️ Everyday Goods Price Board</h3><button onclick="go('ai');quickAI('Which everyday goods are getting more expensive in Kenya and why?')">Ask Kim</button></div>
+<div class="card market-board">
+  <p class="small-note">Track more than maize: cereals, vegetables, fruits, meat, poultry and farm products. Values marked below are bundled KAMIS observations and include their source date; use <b>Refresh prices</b> for the latest official feed when the backend is online.</p>
+  <div class="market-controls">
+    <input id="marketSearch" class="search-input" placeholder="Search goods, county or market…" oninput="filterGoods()">
+    <select id="marketCategory" class="search-input" onchange="filterGoods()"><option value="all">All goods</option><option value="cereals">Cereals & pulses</option><option value="vegetables">Vegetables</option><option value="fruits">Fruits</option><option value="animal">Animal products</option><option value="farm">Farm products</option><option value="staples">Household staples</option></select>
+    <select id="marketCounty" class="search-input" onchange="filterGoods()"><option value="all">All 47 counties</option></select>
+    <input id="marketPlace" class="search-input" placeholder="Market e.g. Kawangware" oninput="filterGoods()">
+  </div>
+  <div class="section-actions"><button class="wide-btn" onclick="searchSelectedMarket()">🔎 Search selected market on live KAMIS</button><button class="outline-btn" onclick="resetMarketFilters()">Reset filters</button></div>
+  <div id="marketCoverage" class="small-note"></div>
+  <div id="goodsPriceGrid" class="grid2"></div>
+</div>
+<div id="marketLiveStatus" class="small-note">Loading latest verified official data…</div><div id="marketLive" class="grid2"></div>
+<div class="section-actions"><button class="wide-btn" onclick="loadMarketData()">↻ Update all market data</button><button class="outline-btn" onclick="go('backends')">Legal backend registry</button></div>
+<div class="title"><h3>⚖️ Legal market-data backends</h3><span class="badge">Verified source map</span></div>
+<p class="small-note">UNIKENYA only consumes public information or authorised APIs. It does not bypass logins, scrape private records, or present third-party estimates as official data.</p>
+<div id="marketBackendList" class="grid2"></div>
+<div class="section-actions"><button class="wide-btn" onclick="refreshMarketSources()">Refresh source status</button><button class="outline-btn" onclick="go('backends')">View all legal backends</button></div>
+</section>
+
+<section id="nearby" class="screen">
+<div class="hero"><div class="eyebrow">AROUND YOU</div><h2>Nearby Services</h2><p>Find useful places around your current location or a place you enter.</p></div>
+<div class="card"><label>Place or town</label><input id="nearbyPlace" class="input" placeholder="e.g. Nairobi, Thika, Kisumu"><button class="primary" onclick="nearbySearch('services')">Find nearby</button><button class="secondary" onclick="useMyLocation()">📍 Use my location</button></div>
+<div class="discovery-grid"><div class="discovery-card"><div class="big">🏧</div><b>ATMs</b><span>Find ATMs and cash points nearby.</span><button class="secondary" onclick="nearbySearch('ATMs')">Find</button></div><div class="discovery-card"><div class="big">⛽</div><b>Fuel stations</b><span>Locate petrol stations.</span><button class="secondary" onclick="nearbySearch('fuel stations')">Find</button></div><div class="discovery-card"><div class="big">💊</div><b>Pharmacies</b><span>Locate nearby pharmacies.</span><button class="secondary" onclick="nearbySearch('pharmacies')">Find</button></div><div class="discovery-card"><div class="big">👮</div><b>Police</b><span>Find police stations.</span><button class="secondary" onclick="nearbySearch('police stations')">Find</button></div><div class="discovery-card"><div class="big">🚑</div><b>Ambulance & hospitals</b><span>Find emergency facilities.</span><button class="secondary" onclick="nearbySearch('hospitals')">Find</button></div><div class="discovery-card"><div class="big">🛍️</div><b>Markets</b><span>Find markets and shopping areas.</span><button class="secondary" onclick="nearbySearch('markets')">Find</button></div></div>
+</section>
+
+
+<section id="safaricom" class="screen safaricom-screen"><div class="hero"><div class="eyebrow">SAFARICOM DEALS CENTRE</div><h2>📱 Safaricom Data • Minutes • SMS • Offers</h2><p>One place for publicly published Safaricom bundles and deals. Some offers are targeted or eligibility-based, so UNIKENYA links to the official Safaricom checkout for confirmation.</p></div>
+<div class="card"><div class="row" style="justify-content:space-between;align-items:center"><div><b>🛒 Buy a bundle</b><p style="margin:.25rem 0;color:var(--muted)">Choose data, calls, SMS or all-in-one, then continue through Safaricom's official channel.</p></div><button class="secondary" onclick="openSafaricomBundles()">Official Bundles</button></div></div>
+<div class="saf-tabs"><button class="saf-tab active" onclick="filterSafaricom('all',this)">All offers</button><button class="saf-tab" onclick="filterSafaricom('data',this)">📶 Data</button><button class="saf-tab" onclick="filterSafaricom('voice',this)">📞 Minutes</button><button class="saf-tab" onclick="filterSafaricom('sms',this)">💬 SMS</button><button class="saf-tab" onclick="filterSafaricom('combo',this)">⭐ All-in-One</button><button class="saf-tab" onclick="filterSafaricom('roaming',this)">🌍 Roaming</button><button class="saf-tab" onclick="filterSafaricom('home',this)">🏠 Home</button><button class="saf-tab" onclick="filterSafaricom('entertainment',this)">🎮 Entertainment</button></div>
+<div class="grid2" id="safaricomBundles"></div>
+<div class="card"><h3>🔥 Safaricom Connect</h3><p style="color:var(--muted)">Officially listed offers include GoPlay, HappyGames, Baze, PamojaPlay, Mdundo and Spotify.</p><button onclick="openSafaricomDeals()">View / Buy on Safaricom Connect</button></div>
+<div class="card"><h3>📋 More official offers</h3><div class="section-actions"><button class="outline-btn" onclick="window.open('https://myaccount.safaricom.co.ke/bundles/s-hook','_blank')">S-HOOK Bundles</button><button class="outline-btn" onclick="window.open('https://www.safaricom.co.ke/','_blank')">Safaricom Home</button></div><div class="section-actions"><button class="outline-btn" onclick="window.open('https://www.safaricom.co.ke/images/Terms-Conditions-Okoa-Minutes-SMS-Bundles-Service.pdf','_blank')">Okoa Minutes & SMS</button><button class="outline-btn" onclick="window.open('https://www.safaricom.co.ke/images/Downloads/Terms-and-Conditions-Okoa-Minutes-and-SMS-Bundles-Updated.pdf','_blank')">Okoa Terms</button></div></div>
+<div class="card"><h3>🔐 Safe payment</h3><p style="color:var(--muted)">UNIKENYA never asks for your M-PESA PIN or OTP. Eligibility, targeted offers and final prices are confirmed by Safaricom.</p></div></section>
+
+<section id="tools" class="screen"><div class="hero"><div class="eyebrow">UNIKENYA TOOLBOX</div><h2>🧰 Super Tools</h2><p>Practical everyday tools in one place. Calculations run on your phone; live services open trusted public sources.</p></div>
+<div class="tool-grid">
+<div class="tool-card"><b>💰 Budget Planner</b><p>Split income into needs, savings and flexible spending.</p><button class="secondary" onclick="budgetTool()">Open</button></div>
+<div class="tool-card"><b>🏦 Loan Calculator</b><p>Estimate monthly payment and total interest.</p><button class="secondary" onclick="loanTool()">Open</button></div>
+<div class="tool-card"><b>💵 Salary Calculator</b><p>Quick gross-to-net planning estimate.</p><button class="secondary" onclick="salaryTool()">Open</button></div>
+<div class="tool-card"><b>🎯 Savings Goal</b><p>Find how much to save each month.</p><button class="secondary" onclick="savingsTool()">Open</button></div>
+<div class="tool-card"><b>🏠 Rent Affordability</b><p>Estimate a comfortable rent ceiling.</p><button class="secondary" onclick="rentTool()">Open</button></div>
+<div class="tool-card"><b>📈 Investment Growth</b><p>Estimate compound growth over time.</p><button class="secondary" onclick="investmentTool()">Open</button></div>
+<div class="tool-card"><b>🧮 Full Calculator</b><p>Arithmetic, %, brackets and memory.</p><button class="secondary" onclick="openCalc()">Open</button></div>
+<div class="tool-card"><b>🌦️ Weather</b><p>Open live weather for any Kenyan town.</p><button class="secondary" onclick="weatherTool()">Open</button></div>
+<div class="tool-card"><b>🚌 Transport & Fares</b><p>Search routes, fares and public transport information.</p><button class="secondary" onclick="transportTool()">Open</button></div>
+<div class="tool-card"><b>🌾 Farming Assistant</b><p>Ask Kim about crops, pests, prices and farm planning.</p><button class="secondary" onclick="quickAI('Act as a Kenyan farming assistant. Help me plan crops, inputs, pests, weather and market strategy. Ask for my county and crop if needed.')">Ask Kim</button></div>
+<div class="tool-card"><b>📄 Document Studio</b><p>Create CVs, letters, applications and PDF-ready text with Kim.</p><button class="secondary" onclick="quickAI('Help me create a professional document. Ask me what type I need, then produce a clean copy-ready version.')">Open</button></div>
+<div class="tool-card"><b>🏘️ Housing Finder</b><p>Search homes, rentals and cost-of-living information.</p><button class="secondary" onclick="housingTool()">Search</button></div>
+<div class="tool-card"><b>🛒 Price Compare</b><p>Search current Kenyan prices and compare sellers.</p><button class="secondary" onclick="quickAI('Help me compare the current Kenyan price of a product. Ask for the product, town and quantity, and tell me which public sources to verify.')">Compare</button></div>
+<div class="tool-card"><b>🚨 Emergency Mode</b><p>Quick access to Kenya emergency services and nearby facilities.</p><button class="secondary" onclick="emergencyTool()">Open</button></div>
+<div class="tool-card"><b>⚖️ Legal Guide</b><p>Understand rights and find official legal/public bodies.</p><button class="secondary" onclick="quickAI('Give me general Kenyan legal information and the correct official body to contact. Do not request passwords or private records.')">Ask Kim</button></div>
+<div class="tool-card"><b>🎓 Study Tutor</b><p>Practice questions, explanations and revision plans.</p><button class="secondary" onclick="quickAI('Be my study tutor. Ask me the subject, topic and level, then teach me with examples and practice questions.')">Study</button></div>
+<div class="tool-card"><b>💼 Career Coach</b><p>CVs, interviews, job searches and career planning.</p><button class="secondary" onclick="quickAI('Act as my career coach. Help me identify suitable Kenyan or remote work, improve my CV and prepare for interviews.')">Start</button></div>
+<div class="tool-card"><b>🗳️ Civic Guide</b><p>Find public participation, complaints and government contacts.</p><button class="secondary" onclick="quickAI('Help me navigate a Kenyan civic or government issue. Identify the correct official institution and practical next steps.')">Open</button></div>
+<div class="tool-card"><b>📊 Kenya Data</b><p>Ask Kim to explain economic, county and public statistics.</p><button class="secondary" onclick="quickAI('Explain Kenyan public statistics clearly. Tell me the official source I should verify the figures with when the data is current.')">Explore</button></div>
+<div class="tool-card"><b>🧳 Travel Planner</b><p>Plan Kenyan trips, routes, budgets and packing lists.</p><button class="secondary" onclick="travelTool()">Plan</button></div>
+<div class="tool-card"><b>🛍️ Marketplace</b><p>Buy, sell, compare and search local listings.</p><button class="secondary" onclick="marketplaceTool()">Open</button></div>
+<div class="tool-card"><b>🏢 Business Starter</b><p>Business ideas, registration steps, pricing and planning.</p><button class="secondary" onclick="businessTool()">Start</button></div>
+<div class="tool-card"><b>🧾 Tax Helper</b><p>Understand KRA tasks and prepare questions for official channels.</p><button class="secondary" onclick="quickAI('Act as a Kenyan tax information assistant. Explain KRA processes in simple language, identify the official KRA service, and clearly say when current figures or personal records must be verified on KRA.')">Ask Kim</button></div>
+<div class="tool-card"><b>💡 Utilities Hub</b><p>Power, water, internet, bills and service contacts.</p><button class="secondary" onclick="utilitiesTool()">Open</button></div>
+<div class="tool-card"><b>🛡️ Scam Check</b><p>Check suspicious messages, links and offers without sharing passwords or OTPs.</p><button class="secondary" onclick="scamTool()">Check</button></div>
+<div class="tool-card"><b>🪪 Document Checklist</b><p>Build a checklist for passports, IDs, applications and business tasks.</p><button class="secondary" onclick="documentChecklistTool()">Build</button></div>
+<div class="tool-card"><b>🗓️ Reminder Planner</b><p>Create local reminders for applications, bills, study and renewals.</p><button class="secondary" onclick="reminderTool()">Add</button></div>
+<div class="tool-card"><b>🧑‍⚖️ Rights & Complaints</b><p>Find the right oversight body and draft a formal complaint.</p><button class="secondary" onclick="quickAI('Help me understand my rights in Kenya and draft a formal complaint. Ask what happened and identify the appropriate official institution. Do not request passwords or private account credentials.')">Start</button></div>
+<div class="tool-card"><b>🧑‍🌾 Farm Planner</b><p>Crop calendars, input planning, farm budgets and market questions.</p><button class="secondary" onclick="farmPlannerTool()">Plan</button></div>
+<div class="tool-card"><b>📋 Form & Application Helper</b><p>Turn a task into a clear step-by-step application checklist.</p><button class="secondary" onclick="quickAI('Help me turn my Kenyan application task into a step-by-step checklist. Ask which service, county, deadline and documents I have, but never ask for passwords, PINs or OTPs.')">Build</button></div>
+<div class="tool-card"><b>🧠 Life Planner</b><p>Plan study, work, money, errands and personal goals together.</p><button class="secondary" onclick="lifePlannerTool()">Plan</button></div>
+<div class="tool-card"><b>🔐 Privacy Centre</b><p>Learn what UNIKENYA stores locally and how to protect your accounts.</p><button class="secondary" onclick="privacyTool()">Open</button></div>
+<div class="tool-card"><b>📍 Location Share</b><p>Generate a map location link to share with trusted contacts.</p><button class="secondary" onclick="oneLocation()">Share</button></div>
+<div class="tool-card"><b>📞 Contact Finder</b><p>Find official contacts for government, utilities and emergencies.</p><button class="secondary" onclick="contactTool()">Find</button></div>
+<div class="tool-card"><b>🎁 Gift & Shopping Planner</b><p>Set a budget and let Kim build a practical shopping shortlist.</p><button class="secondary" onclick="quickAI('Help me plan a shopping list or gift within a Kenyan budget. Ask my budget, town, recipient and preferences.')">Plan</button></div>
+<div class="tool-card"><b>📝 Notes & Saved Ideas</b><p>Keep useful UNIKENYA notes locally on this device.</p><button class="secondary" onclick="notesTool()">Open</button></div>
+<div class="tool-card"><b>📤 Share UNIKENYA</b><p>Share the app with others.</p><button class="secondary" onclick="shareApp()">Share</button></div>
+<div class="tool-card"><b>🧭 Service Navigator</b><p>Describe a need and jump to the best UNIKENYA section.</p><button class="secondary" onclick="serviceNavigator()">Navigate</button></div>
+<div class="tool-card"><b>🧮 Unit Converter</b><p>Convert distance, weight, area and temperature.</p><button class="secondary" onclick="converterTool()">Convert</button></div>
+<div class="tool-card"><b>⏱️ Time & Date Tools</b><p>Age, date differences and planning.</p><button class="secondary" onclick="dateTool()">Open</button></div>
+<div class="tool-card"><b>🌐 Language Helper</b><p>Translate and explain Kenyan-language messages with Kim.</p><button class="secondary" onclick="quickAI('Act as a translation assistant. Translate my message accurately and explain tone when useful. Ask which language I want.')">Translate</button></div>
+<div class="tool-card"><b>🧑‍💻 Coding & Tech</b><p>Programming, debugging, websites and digital skills.</p><button class="secondary" onclick="quickAI('You are my general coding and technology assistant. Help with programming, debugging, web development, databases and learning. Give practical examples.')">Ask Kim</button></div>
+<div class="tool-card"><b>📖 Research Assistant</b><p>Summarise, compare, structure and explain topics with Kim.</p><button class="secondary" onclick="quickAI('Act as a research assistant. Help me understand, compare and structure information. Clearly distinguish known facts, assumptions and what should be verified.')">Research</button></div>
+<div class="tool-card"><b>🔔 Smart Alerts</b><p>Manage local reminders and saved price/application watch items.</p><button class="secondary" onclick="openSettings()">Manage</button></div>
+</div></section>
+
+<section id="more" class="screen"><div class="hero"><div class="eyebrow">MORE TOOLS</div><h2>Citizen Toolkit</h2><p>Useful tools that do not require UNIKENYA to hold sensitive government data.</p></div><div class="grid2"><div class="feature"><b>🧮 Calculator</b><span>Open calculator</span><button class="secondary" onclick="openCalc()">Use</button></div><div class="feature"><b>🗺️ Nearby</b><span>Find services around you</span><button class="secondary" onclick="maps('services near me')">Find</button></div><div class="feature"><b>📝 Draft a letter</b><span>AI can help write a formal letter</span><button class="secondary" onclick="quickAI('Help me draft a formal letter to a Kenyan government office')">Draft</button></div><div class="feature"><b>🔎 Find a service</b><span>Describe what you need</span><button class="secondary" onclick="go('ai')">Ask AI</button></div></div></section>
+
+<section id="profile" class="screen"><div class="hero"><div class="eyebrow">ACCOUNT</div><h2 id="profileName">Citizen</h2><p id="profileEmail"></p></div><div class="card"><label>Full name</label><input id="editName" class="input"><label>Email</label><input id="editEmail" class="input"><button class="primary" onclick="saveProfile()">Save changes</button><button class="danger" onclick="logout()">Sign out</button></div></section>
+</main>
+
+<nav class="bottom">
+<button class="nav active" data-s="home" onclick="go('home')"><span>⌂</span>Home</button>
+<button class="nav" data-s="one" onclick="go('one')"><span>▦</span>Explore</button>
+<button class="nav" data-s="services" onclick="go('services')"><span>🏛️</span>Services</button>
+<button class="nav" data-s="ai" onclick="go('ai')"><span>✨</span>Kim</button>
+<button class="nav" data-s="profile" onclick="go('profile')"><span>◉</span>Profile</button>
+</nav>
+</div>
+
+<div id="modal" class="modal" onclick="if(event.target===this)closeModal()"><div class="sheet"><button class="close" onclick="closeModal()">Close</button><div id="sheet"></div></div></div><div id="toast" class="toast"></div>
+
+<script>
+const services=[
+["eCitizen","Government digital services","https://ecitizen.go.ke/","🏛️"],["Digital ID","Government digital identity information","https://did.ecitizen.go.ke/","🪪"],["KRA","Tax and revenue services","https://www.kra.go.ke/our-online-services","💰"],["NTSA","Transport and vehicle services","https://serviceportal.ntsa.go.ke/","🚗"],["HELB","Student loans and funding","https://helb.ecitizen.go.ke/auth/login","🎓"],["NSSF","Social security services","https://nssf.ecitizen.go.ke/","🛡️"],["Judiciary","Court and judiciary services","https://judiciary.ecitizen.go.ke/","⚖️"],["Huduma Kenya","Government service support","https://www.hudumakenya.go.ke/","🏢"],["BRS","Business registration services","https://brs.go.ke/","🏢"],["EACC","Ethics and anti-corruption","https://eacc.go.ke/","🔎"],["Ombudsman","Public complaints and oversight","https://ombudsman.go.ke/","📣"],["ODPC","Data protection authority","https://www.odpc.go.ke/","🔐"],["Civil Registration","Civil registration services","https://dcrs.ecitizen.go.ke/","📜"],["Social Protection","Social protection services","https://socialprotection.ecitizen.go.ke/","🤝"],["Communications Authority","Communications and cyber services","https://ca.ecitizen.go.ke/","📡"],["Kenya Power","Power services","https://kplc.ecitizen.go.ke/","⚡"],["PPRA","Public procurement oversight","https://ppra.go.ke/","📋"],["Public Service Commission","Public service opportunities","https://psc.ecitizen.go.ke/","💼"]
+];
+const backends=[
+["🏥","Health","Ministry of Health","Public health information can be linked; patient/clinical records require authorised health-system integration and strict privacy controls.","https://www.health.go.ke/","PUBLIC / AUTHORISED API"],
+["🎓","Education","Ministry of Education / HELB","Public education information is linkable; learner records require authorised integration.","https://www.education.go.ke/","PUBLIC / AUTHORISED API"],
+["🚗","Transport","NTSA","Vehicle and driver workflows should use approved NTSA/eCitizen channels.","https://serviceportal.ntsa.go.ke/","OFFICIAL PORTAL"],
+["💰","Revenue","KRA","Taxpayer data and credentials must remain protected; use official KRA channels.","https://www.kra.go.ke/our-online-services","OFFICIAL PORTAL / AUTHORISED API"],
+["🪪","Identity","NRB / Civil Registration / Digital ID","Identity verification must use authorised government services; never copy population databases.","https://did.ecitizen.go.ke/","OFFICIAL / AUTHORISED API"],
+["🤝","Social Protection","State Department for Social Protection","Social assistance services are provided through official channels.","https://socialprotection.ecitizen.go.ke/","OFFICIAL PORTAL"],
+["⚖️","Justice","Judiciary","Court services and records should be accessed through authorised Judiciary systems.","https://judiciary.ecitizen.go.ke/","OFFICIAL PORTAL"],
+["🏢","Business","Business Registration Service","Business registration workflows belong with BRS official services.","https://brs.go.ke/","PUBLIC / OFFICIAL"],
+["🔐","Privacy","ODPC","Data-controller/processor compliance, registration and privacy governance.","https://www.odpc.go.ke/","PUBLIC / OFFICIAL"],
+["📡","Communications","Communications Authority","Communications, cybersecurity and complaints services.","https://ca.ecitizen.go.ke/","OFFICIAL PORTAL"],
+["⚡","Utilities","Kenya Power / approved providers","Billing and payment integrations require approved provider channels.","https://kplc.ecitizen.go.ke/","OFFICIAL PORTAL / AUTHORISED API"],
+["📋","Procurement","PPRA","Public procurement information and oversight.","https://ppra.go.ke/","PUBLIC / OFFICIAL"],
+["🛒","Market prices","KAMIS · Ministry of Agriculture","Public agricultural market-price observations including commodity, market, wholesale/retail price, county and date. Use source attribution and timestamps.","https://kamis.kilimo.go.ke/site/market","PUBLIC DATA SOURCE"],
+["📊","Inflation & CPI","KNBS","Official consumer-price indices, inflation and statistical releases. Treat releases as the source of record.","https://www.knbs.or.ke/","PUBLIC OFFICIAL STATISTICS"],
+["⛽","Fuel prices","EPRA","Official maximum retail petroleum prices and pump-price information by market/location.","https://www.epra.go.ke/EPRA%20Pump%20Prices","PUBLIC OFFICIAL DATA"],
+["💱","Forex & rates","Central Bank of Kenya","Daily indicative KES exchange rates and key financial-market rates; rates are indicative, not guaranteed transaction quotes.","https://www.centralbank.go.ke/forex/","PUBLIC OFFICIAL DATA"],
+["📈","Capital markets","Capital Markets Authority / NSE","Public market information can be linked; trading/account data requires authorised integrations and licensed channels.","https://www.cma.or.ke/","PUBLIC / AUTHORISED API"]
+];
+const marketBackends=[
+ {id:"KAMIS",name:"KAMIS",domain:"Market prices",mode:"PUBLIC DATA SOURCE",url:"https://kamis.kilimo.go.ke/site/market",owner:"Ministry of Agriculture",fields:"commodity • market • wholesale • retail • supply volume • county • date",note:"Public agricultural market observations. Show the source date and attribution when displaying values."},
+ {id:"KNBS",name:"KNBS",domain:"Inflation & CPI",mode:"PUBLIC OFFICIAL STATISTICS",url:"https://www.knbs.or.ke/",owner:"Kenya National Bureau of Statistics",fields:"CPI • inflation • expenditure groups • statistical releases",note:"Official source of record for CPI and inflation releases."},
+ {id:"KNBS-HOUSING",name:"KNBS",domain:"Housing indicators",mode:"PUBLIC OFFICIAL STATISTICS",url:"https://www.knbs.or.ke/data-portals/",owner:"Kenya National Bureau of Statistics",fields:"housing-related CPI group • rent/household-cost indicators • statistical releases",note:"Housing here means official housing-related statistical indicators. Property listings and private rent databases are not presented as official government data."},
+ {id:"EPRA",name:"EPRA",domain:"Fuel prices",mode:"PUBLIC OFFICIAL DATA",url:"https://www.epra.go.ke/EPRA%20Pump%20Prices",owner:"Energy and Petroleum Regulatory Authority",fields:"petrol • diesel • kerosene • location • effective period",note:"Official maximum retail petroleum prices."},
+ {id:"CBK",name:"CBK",domain:"Forex & financial rates",mode:"PUBLIC OFFICIAL DATA",url:"https://www.centralbank.go.ke/forex/",owner:"Central Bank of Kenya",fields:"KES exchange rates • CBR • KESONIA • T-bill rates",note:"CBK rates are indicative; commercial transaction rates can differ."},
+ {id:"CMA / NSE",name:"CMA / NSE",domain:"Capital markets",mode:"PUBLIC / AUTHORISED API",url:"https://www.cma.or.ke/",owner:"Capital Markets Authority / Nairobi Securities Exchange",fields:"market information • listed securities • authorised market data",note:"Use licensed/authorised feeds for protected or commercial market-data services."}
+];
+const rights=[["🔐","Data protection","ODPC","https://www.odpc.go.ke/"],["📣","Public complaints","Ombudsman","https://ombudsman.go.ke/"],["🔎","Anti-corruption","EACC","https://eacc.go.ke/"],["📚","Access to information","ICT Authority / official government sources","https://icta.go.ke/citizens"]];
+const $=id=>document.getElementById(id);
+const store={
+  get(k){try{const v=localStorage.getItem(k); if(v!==null)return v}catch(e){} try{return sessionStorage.getItem(k)}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(k,v)}catch(e){} try{sessionStorage.setItem(k,v)}catch(e){}},
+  remove(k){try{localStorage.removeItem(k)}catch(e){} try{sessionStorage.removeItem(k)}catch(e){}}
+};
+function currentUser(){try{return JSON.parse(store.get('unikenya_user')||'null')}catch(e){return null}}
+function authMode(mode){$('loginForm').classList.toggle('hidden',mode!=='login');$('regForm').classList.toggle('hidden',mode!=='register');$('loginTab').classList.toggle('active',mode==='login');$('regTab').classList.toggle('active',mode==='register')}
+function register(){let n=$('regName').value.trim(),e=$('regEmail').value.trim().toLowerCase(),p=$('regPass').value;if(!n||!e||p.length<6)return toast('Enter name, email and a 6+ character password');let a={name:n,email:e,password:p};store.set('unikenya_account',JSON.stringify(a));store.set('unikenya_user',JSON.stringify({name:n,email:e}));showApp();toast('Account created')}
+function login(){let e=$('loginEmail').value.trim().toLowerCase(),p=$('loginPass').value,a=null;try{a=JSON.parse(store.get('unikenya_account')||'null')}catch(x){}if(!a){return toast('Create an account first, or use Demo Dashboard')}if(a.email!==e||a.password!==p)return toast('Email or password is incorrect');store.set('unikenya_user',JSON.stringify({name:a.name,email:a.email}));showApp()}
+function demoLogin(){store.set('unikenya_user',JSON.stringify({name:'Demo Citizen',email:'demo@unikenya.local'}));showApp();toast('Welcome to UNIKENYA')}
+function showApp(){$('auth').classList.add('hidden');$('app').classList.remove('hidden');render()}
+function logout(){store.remove('unikenya_user');location.reload()}
+function go(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.s===id));scrollTo(0,0)}
+function render(){let u=currentUser()||{name:'Citizen',email:''};$('greet').textContent='Welcome, '+(u.name||'Citizen').split(' ')[0]+'.';$('profileName').textContent=u.name||'Citizen';$('profileEmail').textContent=u.email||'';$('editName').value=u.name||'';$('editEmail').value=u.email||'';renderServices();renderBackends();renderMarketBackends();renderRights();renderMoney();renderApps()}
+function renderServices(){$('serviceList').innerHTML=services.map(s=>`<div class="service"><div class="sico">${s[3]}</div><div class="service-info"><b>${s[0]}</b><span>${s[1]}</span></div><button class="open" onclick="window.open('${s[2]}','_blank')">Open</button></div>`).join('')}
+function renderBackends(){$('backendList').innerHTML=backends.map(b=>`<div class="service"><div class="sico">${b[0]}</div><div class="service-info"><b>${b[1]} · ${b[2]}</b><span>${b[3]}</span><small class="source-tag">${b[5]}</small></div><button class="open" onclick="window.open('${b[4]}','_blank')">Official</button></div>`).join('')}
+function renderRights(){$('rightsList').innerHTML=rights.map(b=>`<div class="service"><div class="sico">${b[0]}</div><div class="service-info"><b>${b[1]}</b><span>${b[2]}</span></div><button class="open" onclick="window.open('${b[3]}','_blank')">Open</button></div>`).join('')}
+function renderMoney(){let a=[services[2],services[15],services[4],services[5]];$('moneyList').innerHTML=a.map(s=>`<div class="service"><div class="sico">${s[3]}</div><div class="service-info"><b>${s[0]}</b><span>${s[1]}</span></div><button class="open" onclick="window.open('${s[2]}','_blank')">Open</button></div>`).join('')}
+function renderApps(){let a=JSON.parse(store.get('unikenya_apps')||'[]');$('appCount').textContent=a.length;$('appsList').innerHTML=a.length?a.map(x=>`<div class="card" style="display:flex;align-items:center;gap:10px"><div class="sico">📄</div><div style="flex:1"><b>${esc(x.title)}</b><div style="font-size:10px;color:var(--muted);margin-top:3px">${esc(x.ref)}</div></div><span class="badge">${esc(x.status)}</span></div>`).join(''):'<div class="card empty">No saved applications yet.</div>'}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function newApp(){let t=prompt('Application/service name:');if(!t)return;let a=JSON.parse(store.get('unikenya_apps')||'[]');a.unshift({title:t,ref:'UNI-'+Math.random().toString(36).slice(2,10).toUpperCase(),status:'Saved'});store.set('unikenya_apps',JSON.stringify(a));renderApps();toast('Application saved')}
+function saveProfile(){let n=$('editName').value.trim(),e=$('editEmail').value.trim().toLowerCase();if(!n||!e)return toast('Enter name and email');let a=JSON.parse(store.get('unikenya_account')||'{}');a.name=n;a.email=e;store.set('unikenya_account',JSON.stringify(a));localStorage.setItem('unikenya_user',JSON.stringify({name:n,email:e}));render();toast('Profile updated')}
+function maps(q){window.open('https://www.google.com/maps/search/'+encodeURIComponent(q+' Kenya'),'_blank')}
+function traffic(q){window.open('https://www.google.com/maps/search/'+encodeURIComponent(q),'_blank')}
+function directions(){let d=$('destination').value.trim();if(d)window.open('https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(d+', Kenya'),'_blank')}
+let allNews=[];let newsFilter='All';
+const fallbackNews=[
+ {source:'The Standard',category:'National',title:"Senate Majority Leader calls for speedy probe into Standard Editor's abduction",image:'https://cdn.standardmedia.co.ke/images/wysiwyg/images/88jOqsfzDMD8igKRK23klaQAtPtwtrodl144r6ek.jpg',url:'https://www.standardmedia.co.ke/',time:'Today'},
+ {source:'The Standard',category:'Business',title:'Centum taps insider as Mworia exits after nearly two decades',image:'https://cdn.standardmedia.co.ke/images/wysiwyg/images/cfqpDd6Ri3PiofX8st7nMUy4ldPtP60DBWJ2jzoo.jpg',url:'https://www.standardmedia.co.ke/',time:'Today'},
+ {source:'The Standard',category:'National',title:'KRA defends cargo clearance rules',image:'https://cdn.standardmedia.co.ke/images/wysiwyg/images/i0KBMFoGMg8mwA0F8nu46FHkwRB3OAWiEqahpCoH.jpg',url:'https://www.standardmedia.co.ke/',time:'Today'},
+ {source:'The Standard',category:'Africa',title:"Who was Tanzania's first Gentleman Hafidh Ameir Hassan",image:'https://cdn.standardmedia.co.ke/images/wysiwyg/images/ZBWe6pGi5yCEX78XbL7qGR90S1236azAOVVCTb16.jpg',url:'https://www.standardmedia.co.ke/',time:'Today'},
+ {source:'The Star',category:'Business',title:'KRA defends new import rules amid cargo clearance row',url:'https://www.the-star.co.ke/news/2026-09-07-kra-defends-new-import-rules',time:'Today'},
+ {source:'The Star',category:'National',title:'Wash wash gangs: Kenya tightens noose on money laundering in bid to exit grey list',url:'https://www.the-star.co.ke/news/2026-09-07-wash-wash-gangs-kenya-tightens-noose-on-money-laundering',time:'Today'},
+ {source:'The Star',category:'Africa',title:"Tanzanian President Samia Suluhu's husband is dead",url:'https://www.the-star.co.ke/news/2026-09-07-samia-suluhus-husband-is-dead',time:'Today'},
+ {source:'The Star',category:'National',title:'Mudavadi: Kenya committed to strengthening strategic ties with US',url:'https://www.the-star.co.ke/',time:'Today'},
+ {source:'Business Daily',category:'Business',title:"Puzzle of Airtel’s licence status as CA issues new notice",url:'https://www.businessdailyafrica.com/bd/corporate/companies/puzzle-of-airtel-s-licence-status-as-ca-issues-new-notice-5585994',time:'Today'},
+ {source:'Business Daily',category:'Business',title:'State eyes emergency land for Mau Summit toll road',url:'https://www.businessdailyafrica.com/bd/economy/state-eyes-emergency-land-for-mau-summit-toll-road-5586000',time:'Today'},
+ {source:'Business Daily',category:'Business',title:'Kenya eyes Sh400bn investor deals as jobs pressure mounts',url:'https://www.businessdailyafrica.com/bd/economy/kenya-eyes-sh400bn-investor-deals-as-jobs-pressure-mounts-5584326',time:'Today'},
+ {source:'Nation',category:'National',title:"Turkana’s water miracle that never came",url:'https://nation.africa/kenya/counties/turkana/turkana-s-water-miracle-that-never-came-5586384',time:'Today'},
+ {source:'Nation',category:'Agriculture',title:'Meat sector hit by drought, feed shortages',url:'https://nation.africa/kenya/news/meat-sector-hit-by-drought-feed-shortages-5574298',time:'Recent'},
+ {source:'Nation',category:'Business',title:'Animal feed manufacturers push for cultivation of yellow maize',url:'https://nation.africa/kenya/climate/-animal-feed-manufacturers-push-for-cultivation-of-yellow-maize--5534902',time:'Recent'},
+ {source:'Nation',category:'Business',title:'Pain for Kenyans as egg prices climb 20pc on high feed costs, seasonal demand',url:'https://nation.africa/kenya/business/pain-for-kenyans-as-egg-prices-climb-20pc-on-high-feed-costs-seasonal-demand-5372156',time:'Recent'}
+];
+const newsDefaultImage='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent('<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"900\" height=\"500\" viewBox=\"0 0 900 500\"><rect width=\"900\" height=\"500\" fill=\"#087f5b\"/><text x=\"450\" y=\"260\" text-anchor=\"middle\" font-size=\"92\" fill=\"white\">🇰🇪 📰</text></svg>');
+const sourceFallbackImages={
+ 'The Standard':'https://cdn.standardmedia.co.ke/images/wysiwyg/images/88jOqsfzDMD8igKRK23klaQAtPtwtrodl144r6ek.jpg',
+ 'Business Daily':'https://www.businessdailyafrica.com/resource/image/5585996/landscape_ratio2x1/320/160/bf781771e743cd975bfda55f50342c7/JI/tobe.jpg'
+};
+function newsImg(x){return x.image||sourceFallbackImages[x.source]||newsDefaultImage}
+function renderNews(items){const list=$('newsList'),home=$('homeNews');if(!list)return;let arr=(items||[]).filter(x=>newsFilter==='All'||x.category===newsFilter);list.innerHTML=arr.length?arr.map(x=>`<article class="news-item card"><img loading="eager" referrerpolicy="no-referrer" decoding="async" src="${esc(newsImg(x))}" onerror="this.src=newsDefaultImage" alt="News image"><div class="news-body"><div class="meta"><span class="source-badge">${esc(x.source||'News')}</span><span>${esc(x.time||'Latest')}</span></div><h3>${esc(x.title)}</h3><p>${esc(x.category||'Kenya')}</p><a href="${esc(x.url||'#')}" target="_blank" rel="noopener">Read at publisher →</a></div></article>`).join(''):'<div class="card empty">No headlines in this category right now.</div>';if(home){home.innerHTML=(items||[]).slice(0,8).map(x=>`<article class="news-card"><img loading="eager" referrerpolicy="no-referrer" decoding="async" src="${esc(newsImg(x))}" onerror="this.src=newsDefaultImage" alt="News image"><div class="news-body"><small>${esc(x.source||'News')} · ${esc(x.category||'Kenya')}</small><b>${esc(x.title)}</b><a href="${esc(x.url||'#')}" target="_blank" rel="noopener">Read at publisher →</a></div></article>`).join('')} }
+function filterNews(cat){newsFilter=cat;renderNews(allNews)}
+async function refreshNews(){const status=$('newsStatus');if(status)status.innerHTML='<b>Updating news…</b><p style="color:var(--muted)">Checking trusted public feeds for new headlines.</p>';try{const base=(window.UNIKENYA_API_BASE||location.origin);const r=await fetch(base+'/api/news?limit=40',{cache:'no-store'});const j=await r.json();if(!r.ok)throw new Error(j.detail||'News backend unavailable');allNews=j.items||[];renderNews(allNews);if(status)status.innerHTML=`<b>Updated ${new Date(j.updated_at).toLocaleString()}</b><p style="color:var(--muted)">${esc(j.items?.length||0)} headlines from ${esc((j.sources||[]).join(', '))}. New public headlines replace older ones automatically.</p>`}catch(e){allNews=fallbackNews;renderNews(allNews);if(status)status.innerHTML='<b>Showing latest bundled headlines</b><p style="color:var(--muted)">The daily news backend is not connected on this local copy. When hosted, UNIKENYA will refresh public feeds automatically.</p>'}}
+function newsSources(){openSheet('<h2>📰 News sources</h2><div class="card"><b>The Standard</b><p>Public RSS feeds for Kenya, business, politics, sports, world and entertainment.</p></div><div class="card"><b>Daily Nation</b><p>Public newsroom pages and headlines.</p></div><div class="card"><b>The Star</b><p>Public Kenya news pages.</p></div><div class="card"><b>Business Daily</b><p>Public business and economy headlines.</p></div>')}
+function startNewsAutoRefresh(){refreshNews();setInterval(()=>{if($('news')&&$('news').classList.contains('active'))refreshNews()},900000)}
+function openNews(){go('news');refreshNews()}
+function notifications(){$('sheet').innerHTML='<h2>🔔 Notifications</h2><div class="card"><b>Welcome to UNIKENYA</b><p style="color:var(--muted)">Your citizen command centre is ready.</p></div><div class="card"><b>Safety</b><p style="color:var(--muted)">Official portals open outside UNIKENYA. Never share passwords or OTPs with anyone.</p></div>';$('modal').classList.add('show')}
+function closeModal(){$('modal').classList.remove('show')}
+function toast(t){$('toast').textContent=t;$('toast').style.display='block';clearTimeout(window.__t);window.__t=setTimeout(()=>$('toast').style.display='none',2200)}
+const goodsPriceBoard=[
+ {name:'Dry Maize',cat:'cereals',icon:'🌽',wholesale:'KES 50/kg',retail:'KES 65/kg',market:'Embu',county:'Embu',date:'2026-04-03'},
+ {name:'Maize Flour',cat:'staples',icon:'🌽',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Rice',cat:'cereals',icon:'🍚',wholesale:'KES 160/kg',retail:'KES 180/kg',market:'Kawangware',county:'Nairobi',date:'2026-04-22'},
+ {name:'Wheat Grain',cat:'cereals',icon:'🌾',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Sorghum',cat:'cereals',icon:'🌾',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Millet',cat:'cereals',icon:'🌾',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Beans (Canadian Wonder)',cat:'cereals',icon:'🫘',wholesale:'KES 115/kg',retail:'KES 150/kg',market:'Embu',county:'Embu',date:'Bundled KAMIS observation'},
+ {name:'Green Grams',cat:'cereals',icon:'🫘',wholesale:'KES 135/kg',retail:'KES 175/kg',market:'Embu',county:'Embu',date:'Bundled KAMIS observation'},
+ {name:'Cowpeas',cat:'cereals',icon:'🫘',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Pigeon Peas',cat:'cereals',icon:'🫘',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Lentils',cat:'cereals',icon:'🫘',wholesale:'KES 210/kg',retail:'KES 300/kg',market:'Embu',county:'Embu',date:'Bundled KAMIS observation'},
+ {name:'Tomatoes',cat:'vegetables',icon:'🍅',wholesale:'KES 102.94/kg',retail:'KES 150/kg',market:'Mulot',county:'Bomet',date:'2026-04-22'},
+ {name:'Carrots',cat:'vegetables',icon:'🥕',wholesale:'KES 40–50/kg',retail:'KES 50–60/kg',market:'Kangeta',county:'Meru',date:'2026-04-22'},
+ {name:'Cabbages',cat:'vegetables',icon:'🥬',wholesale:'KES 10/kg',retail:'KES 15/kg',market:'Kangeta',county:'Meru',date:'2026-04-22'},
+ {name:'Kales / Sukuma Wiki',cat:'vegetables',icon:'🥬',wholesale:'KES 20/kg',retail:'KES 30/kg',market:'Embu',county:'Embu',date:'Bundled KAMIS observation'},
+ {name:'Spinach',cat:'vegetables',icon:'🌿',wholesale:'KES 40/kg',retail:'KES 60/kg',market:'Embu',county:'Embu',date:'Bundled KAMIS observation'},
+ {name:'White Irish Potatoes',cat:'vegetables',icon:'🥔',wholesale:'KES 54.29/kg',retail:'KES 57.14/kg',market:'Gakoromone',county:'Meru',date:'2026-04-03'},
+ {name:'Sweet Potatoes',cat:'vegetables',icon:'🍠',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Arrowroots',cat:'vegetables',icon:'🥔',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Dry Onions',cat:'vegetables',icon:'🧅',wholesale:'KES 120/kg',retail:'KES 140/kg',market:'Embu',county:'Embu',date:'Bundled KAMIS observation'},
+ {name:'Cucumber',cat:'vegetables',icon:'🥒',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Banana (Cooking)',cat:'fruits',icon:'🍌',wholesale:'KES 25/kg',retail:'KES 30/kg',market:'Kangeta',county:'Meru',date:'2026-04-22'},
+ {name:'Pawpaw',cat:'fruits',icon:'🥭',wholesale:'KES 60/kg',retail:'KES 90/kg',market:'Gakoromone',county:'Meru',date:'2026-04-03'},
+ {name:'Watermelon',cat:'fruits',icon:'🍉',wholesale:'KES 30/kg',retail:'KES 35/kg',market:'Gakoromone',county:'Meru',date:'2026-04-03'},
+ {name:'Oranges',cat:'fruits',icon:'🍊',wholesale:'KES 50/kg',retail:'KES 80/kg',market:'Embu',county:'Embu',date:'Bundled KAMIS observation'},
+ {name:'Avocado',cat:'fruits',icon:'🥑',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Mangoes',cat:'fruits',icon:'🥭',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Pineapple',cat:'fruits',icon:'🍍',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Chicken',cat:'animal',icon:'🐔',wholesale:'KES 560–1,300/head',retail:'—',market:'Makunga',county:'Kakamega',date:'2026-04-15'},
+ {name:'Eggs',cat:'animal',icon:'🥚',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Beef',cat:'animal',icon:'🥩',wholesale:'KES 708.97/kg',retail:'—',market:'Nairobi',county:'Nairobi',date:'Bundled KAMIS observation'},
+ {name:'Goat Meat',cat:'animal',icon:'🐐',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Mutton',cat:'animal',icon:'🍖',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Fresh Milk',cat:'staples',icon:'🥛',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Sugar',cat:'staples',icon:'🧂',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Cooking Oil',cat:'staples',icon:'🫗',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Wheat Flour',cat:'staples',icon:'🌾',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Bread',cat:'staples',icon:'🍞',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Salt',cat:'staples',icon:'🧂',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Ginger',cat:'farm',icon:'🫚',wholesale:'KES 200/kg',retail:'KES 300/kg',market:'Embu',county:'Embu',date:'Bundled KAMIS observation'},
+ {name:'Garlic',cat:'farm',icon:'🧄',wholesale:'KES 300/kg',retail:'KES 400/kg',market:'Kitale Municipality',county:'Trans-Nzoia',date:'2026-03-12'},
+ {name:'Sunflower Seeds',cat:'farm',icon:'🌻',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'},
+ {name:'Fertilizer',cat:'farm',icon:'🌱',wholesale:'Live KAMIS',retail:'Live KAMIS',market:'—',county:'',date:'Use live KAMIS'}
+];
+const kenyaCounties=['Baringo','Bomet','Bungoma','Busia','Elgeyo-Marakwet','Embu','Garissa','Homa Bay','Isiolo','Kajiado','Kakamega','Kericho','Kiambu','Kilifi','Kirinyaga','Kisii','Kisumu','Kitui','Kwale','Laikipia','Lamu','Machakos','Makueni','Mandera','Marsabit','Meru','Migori','Mombasa','Murang’a','Nairobi','Nakuru','Nandi','Narok','Nyamira','Nyandarua','Nyeri','Samburu','Siaya','Taita-Taveta','Tana River','Tharaka-Nithi','Trans Nzoia','Turkana','Uasin Gishu','Vihiga','Wajir','West Pokot'];
+function initMarketFilters(){const s=$('marketCounty');if(!s)return;s.innerHTML='<option value="all">All 47 counties</option>'+kenyaCounties.map(c=>`<option>${esc(c)}</option>`).join('');}
+function renderGoodsPriceBoard(list=goodsPriceBoard){const el=$('goodsPriceGrid');if(!el)return;const status=$('marketCoverage');const liveCount=list.filter(x=>x.retail==='Live KAMIS').length;if(status)status.textContent=`${list.length} tracked goods • ${kenyaCounties.length} counties • ${liveCount} goods marked for live KAMIS lookup. Bundled prices are clearly dated; no price is invented for counties without an observation.`;el.innerHTML=list.map(x=>`<div class="feature goods-card"><div class="goods-icon">${x.icon}</div><b>${esc(x.name)}</b><span><strong>Retail:</strong> ${esc(x.retail)}<br><strong>Wholesale:</strong> ${esc(x.wholesale)}<br>${esc(x.market||'')} ${x.county?(', '+esc(x.county)):''}</span><small class="source-tag">KAMIS • ${esc(x.date)}</small></div>`).join('')||'<div class="card">No goods match your filters.</div>'}
+function filterGoods(){const q=($('marketSearch')?.value||'').toLowerCase().trim();const cat=$('marketCategory')?.value||'all';const county=$('marketCounty')?.value||'all';const place=($('marketPlace')?.value||'').toLowerCase().trim();const list=goodsPriceBoard.filter(x=>(cat==='all'||x.cat===cat)&&(county==='all'||x.county===county)&&(!place||String(x.market||'').toLowerCase().includes(place))&&(!q||x.name.toLowerCase().includes(q)||String(x.market||'').toLowerCase().includes(q)||String(x.county||'').toLowerCase().includes(q)));renderGoodsPriceBoard(list)}
+function resetMarketFilters(){if($('marketSearch'))$('marketSearch').value='';if($('marketCategory'))$('marketCategory').value='all';if($('marketCounty'))$('marketCounty').value='all';if($('marketPlace'))$('marketPlace').value='';filterGoods()}
+function searchSelectedMarket(){const county=$('marketCounty')?.value||'all';const market=($('marketPlace')?.value||'').trim();const q=($('marketSearch')?.value||'').trim();const params=new URLSearchParams();if(county!=='all')params.set('county',county);if(market)params.set('market',market);if(q)params.set('commodity',q);const url='https://kamis.kilimo.go.ke/site/market_search'+(params.toString()?'?'+params.toString():'');window.open(url,'_blank','noopener');toast('Opening public KAMIS market search…')}
+const marketSnapshot={updated_at:'2026-09-07T00:00:00Z',sections:[
+ {title:'Forex & financial rates',source:'Central Bank of Kenya',rows:[['US DOLLAR','129.43','KES per USD'],['STG POUND','174.89','KES per GBP'],['EURO','150.34','KES per EUR'],['Central Bank Rate','8.75%','11/08/2026'],['KESONIA','8.7555%','04/09/2026'],['91-Day T-Bill','8.769%','07/09/2026']],note:'Latest verified CBK public rates. Transaction rates from banks/forex bureaus may differ.'},
+ {title:'Inflation & housing indicators',source:'Kenya National Bureau of Statistics',rows:[['Annual inflation','6.6%','August 2026'],['Food & non-alcoholic beverages','9.0%','August 2026'],['Transport','15.7%','August 2026'],['Housing, water, electricity, gas & fuels','3.6%','August 2026']],note:'Latest verified KNBS CPI release.'},
+ {title:'Fuel prices',source:'EPRA',rows:[['Nairobi PMS','KES 214.03/L','15 Aug–14 Sep 2026'],['Nairobi AGO (diesel)','KES 217.86/L','15 Aug–14 Sep 2026'],['Nairobi IK (kerosene)','KES 191.38/L','15 Aug–14 Sep 2026'],['Mombasa PMS','KES 210.87/L','15 Aug–14 Sep 2026']],note:'Official maximum retail petroleum prices.'},
+ {title:'Market prices',source:'KAMIS / Ministry of Agriculture',rows:[['Dry maize • Kawangware','KES 55 wholesale / 65 retail per kg','Nairobi • 07/04/2026'],['Dry maize • Gikomba','KES 53.33 wholesale / 70 retail per kg','Nairobi • 07/04/2026'],['Dry maize • Ahero','KES 65 wholesale / 70 retail per kg','Kisumu • 07/04/2026'],['Dry maize • Maua','KES 55.56 wholesale / 70 retail per kg','Meru • 07/04/2026']],note:'Last verified KAMIS observations bundled with this app. Live KAMIS refresh requires the UNIKENYA backend.'}
+]};
+function renderMarketBackends(){const el=$('marketBackendList');if(!el)return;el.innerHTML=marketBackends.map(x=>`<div class="feature"><b>${x.name} · ${x.domain}</b><span><strong>Owner:</strong> ${x.owner}<br><strong>Data:</strong> ${x.fields}</span><small class="source-tag">${x.mode}</small><button class="secondary" onclick="loadMarketData('${x.id}')">Show in app</button></div>`).join('')}
+function openMarketBackend(id){loadMarketData(id)}
+function refreshMarketSources(){renderMarketBackends();loadMarketData();toast('Updating official market data…')}
+function filterSnapshot(kind){if(!kind)return marketSnapshot;const map={market:['Market prices'],agriculture:['Market prices'],forex:['Forex & financial rates'],fuel:['Fuel prices'],inflation:['Inflation & housing indicators'],housing:['Inflation & housing indicators']};const wanted=map[kind]||[];return {...marketSnapshot,sections:marketSnapshot.sections.filter(x=>wanted.includes(x.title))}}
+async function loadMarketData(kind){const box=$('marketLive');const status=$('marketLiveStatus');if(!box||!status)return;renderLiveMarketData(filterSnapshot(kind));status.textContent='Showing latest verified official data • checking for a live update…';try{const base=(window.UNIKENYA_API_BASE||location.origin);const p=new URLSearchParams();if(kind)p.set('kind',kind);const county=$('marketCounty')?.value||'all';const market=($('marketPlace')?.value||'').trim();const commodity=($('marketSearch')?.value||'').trim();if(county!=='all')p.set('county',county);if(market)p.set('market',market);if(commodity)p.set('commodity',commodity);const url=base+'/api/markets'+(p.toString()?'?'+p.toString():'');const r=await fetch(url,{cache:'no-store'});const j=await r.json();if(!r.ok)throw new Error(j.detail||'Backend unavailable');renderLiveMarketData(j);status.textContent='Updated live: '+new Date(j.updated_at).toLocaleString()+' • official/public source data';}catch(e){status.textContent='Latest verified official data shown • live backend unavailable on this local copy';}}
+function renderLiveMarketData(j){const box=$('marketLive');if(!box)return;let cards=[];(j.sections||[]).forEach(sec=>{let rows=(sec.rows||[]).map(r=>`<tr>${(r||[]).map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('');cards.push(`<div class="card"><div class="title"><h3>${esc(sec.title)}</h3><span class="badge">${esc(sec.source||'Official')}</span></div>${rows?`<div class="table-wrap"><table class="league-table"><tbody>${rows}</tbody></table></div>`:`<p>${esc(sec.value||'No value returned')}</p>`}<small>${esc(sec.note||'')}</small></div>`)});box.innerHTML=cards.join('')||'<div class="card">No market data returned.</div>'}
+
+const safaricomBundles=[
+ {type:'data',name:'500MB Monthly',data:'500MB',price:100,valid:'30 days'},
+ {type:'data',name:'1GB Monthly',data:'1GB',price:250,valid:'30 days'},
+ {type:'data',name:'2.5GB + Free WhatsApp',data:'2.5GB',price:500,valid:'30 days'},
+ {type:'data',name:'10GB + Free WhatsApp',data:'10GB',price:1000,valid:'30 days'},
+ {type:'data',name:'22GB + Free WhatsApp',data:'22GB',price:2000,valid:'30 days'},
+ {type:'data',name:'40GB + Free WhatsApp',data:'40GB',price:3000,valid:'30 days'},
+ {type:'data',name:'60GB + Free WhatsApp',data:'60GB',price:5000,valid:'30 days'},
+ {type:'combo',name:'All-in-One',data:'400MB + 20 minutes + 50 SMS',price:100,valid:'30 days'},
+ {type:'combo',name:'All-in-One',data:'1GB + 50 minutes + 100 SMS',price:250,valid:'30 days'},
+ {type:'combo',name:'All-in-One',data:'2GB + 100 minutes + 500 SMS + Free WhatsApp',price:500,valid:'30 days'},
+ {type:'combo',name:'All-in-One',data:'8GB + 400 minutes + 1,000 SMS + Free WhatsApp',price:1000,valid:'30 days'},
+ {type:'combo',name:'All-in-One',data:'17GB + 1,000 minutes + 2,000 SMS + Free WhatsApp',price:2000,valid:'30 days'},
+ {type:'combo',name:'All-in-One',data:'27GB + 1,500 minutes + 3,000 SMS',price:3000,valid:'30 days'},
+ {type:'combo',name:'All-in-One',data:'47GB + 2,500 minutes + 5,000 SMS',price:5000,valid:'30 days'},
+ {type:'combo',name:'All-in-One',data:'100GB + 7,500 minutes + 10,000 SMS + Free WhatsApp',price:10000,valid:'30 days'},
+ {type:'voice',name:'Okoa Calls & SMS',data:'5 minutes + 10 SMS',price:10,valid:'Until midnight'},
+ {type:'voice',name:'Okoa Calls & SMS',data:'15 minutes + 20 SMS',price:20,valid:'Until midnight'},
+ {type:'voice',name:'Okoa Calls & SMS',data:'40 minutes + 50 SMS',price:50,valid:'24 hours'},
+ {type:'voice',name:'Okoa Calls & SMS',data:'100 minutes + 100 SMS',price:100,valid:'24 hours'},
+ {type:'roaming',name:'East Africa Roaming Internet Lite',data:'40MB',price:500,valid:'5 days'},
+ {type:'roaming',name:'East Africa Roaming Internet Medium',data:'80MB',price:1000,valid:'15 days'},
+ {type:'roaming',name:'East Africa Roaming Internet Heavy',data:'160MB',price:2000,valid:'30 days'},
+ {type:'roaming',name:'East Africa Roaming Voice Lite',data:'20 minutes',price:500,valid:'5 days'},
+ {type:'roaming',name:'East Africa Roaming Voice Medium',data:'40 minutes',price:1000,valid:'15 days'},
+ {type:'roaming',name:'East Africa Roaming Voice Heavy',data:'80 minutes',price:2000,valid:'30 days'},
+ {type:'home',name:'Family Share Data',data:'2GB',price:300,valid:'30 days'},
+ {type:'home',name:'Family Share Data',data:'4GB',price:500,valid:'30 days'},
+ {type:'home',name:'Family Share Data',data:'9GB',price:750,valid:'30 days'},
+ {type:'home',name:'Family Share Data',data:'13GB',price:1000,valid:'30 days'},
+ {type:'home',name:'Family Share Data',data:'20GB',price:1500,valid:'30 days'},
+ {type:'home',name:'Family Share Minutes',data:'350 minutes',price:300,valid:'30 days'},
+ {type:'home',name:'Family Share Minutes',data:'550 minutes',price:500,valid:'30 days'},
+ {type:'home',name:'Family Share Minutes',data:'800 minutes',price:750,valid:'30 days'},
+ {type:'home',name:'Family Share Minutes',data:'1,100 minutes',price:1000,valid:'30 days'},
+ {type:'home',name:'Family Share Minutes',data:'1,600 minutes',price:1500,valid:'30 days'},
+ {type:'entertainment',name:'GoPlay 50MB',data:'50MB',price:10,valid:'24 hours'},
+ {type:'entertainment',name:'GoPlay 100MB',data:'100MB',price:null,valid:'Check official offer'},
+ {type:'entertainment',name:'HappyGames 50MB',data:'50MB',price:null,valid:'Check official offer'},
+ {type:'entertainment',name:'HappyGames 100MB',data:'100MB',price:null,valid:'Check official offer'},
+ {type:'entertainment',name:'Baze Daily',data:'Entertainment pass',price:null,valid:'Check official offer'},
+ {type:'entertainment',name:'Baze 1GB',data:'1GB entertainment',price:null,valid:'Check official offer'},
+ {type:'entertainment',name:'PamojaPlay 50MB',data:'50MB',price:null,valid:'Check official offer'},
+ {type:'entertainment',name:'PamojaPlay 100MB',data:'100MB',price:null,valid:'Check official offer'},
+ {type:'entertainment',name:'Mdundo',data:'Music service',price:null,valid:'Check official offer'},
+ {type:'entertainment',name:'Spotify Premium',data:'Music service',price:null,valid:'Check official offer'}
+];
+let safFilter='all';
+function renderSafaricomBundles(){const b=$('safaricomBundles');if(!b)return;const list=safFilter==='all'?safaricomBundles:safaricomBundles.filter(x=>x.type===safFilter);b.innerHTML=list.map((x,i)=>{const icon=x.type==='data'?'📶':x.type==='voice'?'📞':x.type==='combo'?'⭐':x.type==='roaming'?'🌍':x.type==='home'?'🏠':'🎮';return `<div class="saf-offer"><b>${icon} ${esc(x.name)}</b><span class="meta">${esc(x.data)} • ${esc(x.valid)}</span><span class="saf-price">${x.price==null?'Check Safaricom':`KSh ${x.price.toLocaleString()}`}</span><span class="saf-source">Published/linked to official Safaricom channels</span><button class="secondary" onclick="buySafaricomBundleByIndex(${i})">${x.price==null?'View offer':'Buy now'}</button></div>`}).join('')}
+function buySafaricomBundleByIndex(i){const list=safFilter==='all'?safaricomBundles:safaricomBundles.filter(x=>x.type===safFilter);const x=list[i];if(x)buySafaricomBundle(x.price,x.name,x.data,x.valid)}
+function filterSafaricom(type,btn){safFilter=type;document.querySelectorAll('.saf-tab').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');renderSafaricomBundles()}
+function openSafaricomBundles(){window.open('https://www.safaricom.com/bundles','_blank')}
+function openSafaricomDeals(){window.open('https://deals.safaricom.co.ke/','_blank')}
+let safaricomPurchase=null;
+function buySafaricomBundle(amount,name,data,valid){
+  safaricomPurchase={amount:Number(amount||0),name:name||'Safaricom offer',data:data||'',valid:valid||''};
+  if(!amount){openSafaricomDeals();return}
+  $('safBuyTitle').textContent='Buy '+safaricomPurchase.name;
+  $('safBuyMeta').textContent=(safaricomPurchase.data?safaricomPurchase.data+' • ':'')+safaricomPurchase.valid+' • KSh '+Number(amount).toLocaleString();
+  $('safPhone').value=localStorage.getItem('uniknya_mpesa_phone')||'';
+  $('safBuyModal').classList.add('show');
+  setTimeout(()=>$('safPhone').focus(),100);
+}
+function closeSafaricomBuy(){$('safBuyModal').classList.remove('show')}
+function normalizeSafPhone(v){let x=String(v||'').replace(/\D/g,'');if(x.startsWith('0'))x='254'+x.slice(1);if(x.startsWith('+'))x=x.slice(1);return x}
+async function confirmSafaricomBuy(){
+  const phone=normalizeSafPhone($('safPhone').value), amount=safaricomPurchase?.amount;
+  if(!/^2547\d{8}$/.test(phone))return toast('Enter a valid Safaricom number, e.g. 0712345678');
+  if(!amount)return;
+  localStorage.setItem('uniknya_mpesa_phone',phone);
+  const btn=$('safConfirmBtn');btn.disabled=true;btn.textContent='Sending prompt…';
+  try{
+    const base=(window.UNIKENYA_API_BASE||location.origin);
+    const r=await fetch(base+'/api/mpesa/stkpush',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone,amount,reference:'UNIKENYA',description:safaricomPurchase.name})});
+    const j=await r.json(); if(!r.ok)throw new Error(j.detail||'Payment prompt could not be sent');
+    closeSafaricomBuy();toast('M-PESA prompt sent. Check your phone and enter your PIN there.');
+  }catch(e){
+    $('safBuyStatus').textContent=e.message||'Payment service is not connected yet.';
+    $('safBuyStatus').style.display='block';
+  }finally{btn.disabled=false;btn.textContent='Confirm & send M-PESA prompt'}
+}
+
+function startMarketAutoRefresh(){initMarketFilters();renderGoodsPriceBoard();loadMarketData();setInterval(()=>{if($('markets')&&$('markets').classList.contains('active'))loadMarketData()},300000)}
+function quickAI(q){$('aiInput').value=q;go('ai');askAI()}
+async function askAI(){
+  const q=$('aiInput').value.trim(); if(!q)return;
+  const m=$('messages');
+  m.insertAdjacentHTML('beforeend',`<div class="msg me">${esc(q)}</div>`);
+  $('aiInput').value=''; m.scrollTop=m.scrollHeight;
+  m.insertAdjacentHTML('beforeend',`<div class="msg" id="kimTyping"><span class="typing">Kim is thinking…</span></div>`);
+  const typing=$('kimTyping');
+  try{
+    const history=[...m.querySelectorAll('.msg')].slice(-12).map(x=>({role:x.classList.contains('me')?'user':'assistant',content:x.innerText}));
+    const base=(window.UNIKENYA_API_BASE||location.origin);
+    const r=await fetch(base+'/api/kim',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q,history})});
+    const j=await r.json();
+    typing.remove();
+    if(!r.ok) throw new Error(j.detail||'Kim is unavailable');
+    m.insertAdjacentHTML('beforeend',`<div class="msg">${formatAI(j.answer||'I could not generate a response.')}</div>`);
+  }catch(e){
+    typing.remove();
+    m.insertAdjacentHTML('beforeend',`<div class="msg"><b>Kim is offline.</b><br>${esc(e.message)}<br><small>Start the included UNIKENYA backend and configure OPENAI_API_KEY on the server. The key is never stored in this HTML file.</small></div>`);
+  }
+  m.scrollTop=m.scrollHeight;
+}
+function formatAI(s){
+  let x=esc(s);
+  x=x.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+  x=x.replace(/\n/g,'<br>');
+  return x;
+}
+function openMusicCharts(){window.open('https://charts.youtube.com/charts/TopSongs/ke/weekly','_blank')}
+function openFKF(){window.open('https://footballkenya.org/','_blank')}
+function openFootballSearch(q){window.open('https://www.google.com/search?q='+encodeURIComponent(q+' Kenya'),'_blank')}
+function trendTab(tab){toast(tab==='music'?'Showing music discovery':'Use the live trend links for current rankings')}
+function nearbySearch(kind){let p=($('nearbyPlace')&&$('nearbyPlace').value.trim())||'Kenya';maps(kind+' near '+p)}
+function useMyLocation(){if(!navigator.geolocation)return toast('Location is not supported on this browser');navigator.geolocation.getCurrentPosition(pos=>{let q=pos.coords.latitude+','+pos.coords.longitude;window.open('https://www.google.com/maps/search/services/@'+q+',15z','_blank')},()=>toast('Location permission was not granted'))}
+let calcState={expr:'',memory:0};
+function _ask(promptText){quickAI(promptText)}
+function travelTool(){const d=prompt('Where are you travelling from and to?');if(!d)return;const b=prompt('Approximate trip budget in KSh (optional):')||'';_ask('Plan a practical Kenya trip for: '+d+'. Budget: '+b+'. Include transport, accommodation ideas, activities, safety, timing and a checklist.');}
+function marketplaceTool(){const q=prompt('What do you want to buy, sell or compare?');if(!q)return;_ask('Help me with a Kenyan marketplace task: '+q+'. Ask my town, budget/price and condition if needed, and give a safe comparison checklist.');}
+function businessTool(){const q=prompt('What business are you considering?');if(!q)return;_ask('Help me start or improve this Kenyan business: '+q+'. Cover customers, startup costs, pricing, registration considerations, risks and a simple first-month plan.');}
+function utilitiesTool(){const q=prompt('Which utility do you need help with? e.g. electricity, water, internet, bill');if(!q)return;_ask('Help me navigate this Kenyan utility task: '+q+'. Identify the official provider/channel and give safe next steps.');}
+function scamTool(){const q=prompt('Paste the suspicious message/link/offer here. Do not include passwords, PINs or OTPs.');if(!q)return;_ask('Check this for scam/fraud warning signs. Do not click or execute anything. Explain red flags, what not to share, and how to verify through an official channel: '+q);}
+function documentChecklistTool(){const q=prompt('What document or application are you preparing?');if(!q)return;_ask('Build a Kenyan application/document checklist for: '+q+'. Include likely documents, preparation steps, official verification points and common mistakes. Never ask for passwords, PINs or OTPs.');}
+function reminderTool(){const title=prompt('Reminder title');if(!title)return;const when=prompt('When? Example: 2026-09-10 09:00');if(!when)return;const a=JSON.parse(store.get('unikenya_reminders')||'[]');a.push({title,when,created:new Date().toISOString()});store.set('unikenya_reminders',JSON.stringify(a));toast('Reminder saved on this device.');}
+function farmPlannerTool(){const crop=prompt('County and crop (e.g. Nakuru, potatoes)');if(!crop)return;_ask('Act as a Kenyan farm planner. Create a practical plan for '+crop+', covering season, land preparation, seed/input considerations, pests, water, budget, expected risks and market strategy. Flag what needs current local verification.');}
+function lifePlannerTool(){const q=prompt('What are your main goals right now?');if(!q)return;_ask('Create a realistic weekly life plan around these goals: '+q+'. Balance work/study, money, health, errands, rest and priorities.');}
+function privacyTool(){showSheet('<h2>🔐 Privacy Centre</h2><p>UNIKENYA should keep sensitive credentials out of chat. Never enter an M-PESA PIN, OTP, banking password or government password into Kim.</p><p>Local preferences such as theme, saved items and reminders may be stored on this device. Backend features should use HTTPS, server-side secrets, access controls and minimal data retention.</p><button class="primary" onclick="closeModal();openSettings()">Open Settings</button>');}
+function contactTool(){const q=prompt('What organisation/service do you need?');if(!q)return;window.open('https://www.google.com/search?q='+encodeURIComponent(q+' Kenya official contact'),'_blank');}
+function notesTool(){const old=store.get('unikenya_notes')||'';const n=prompt('Your local note:',old);if(n!==null){store.set('unikenya_notes',n);toast('Note saved on this device.')}}
+function shareApp(){if(navigator.share){navigator.share({title:'UNIKENYA',text:'UNIKENYA — Kenya Super Citizen Platform',url:location.href}).catch(()=>{})}else{prompt('Copy this app address:',location.href)}}
+function serviceNavigator(){const q=prompt('What do you need? e.g. passport, job, hospital, school, business, bill');if(!q)return;const x=q.toLowerCase();const map=x.includes('job')||x.includes('career')?'jobs':x.includes('school')||x.includes('study')||x.includes('helb')?'schools':x.includes('hospital')||x.includes('health')?'health':x.includes('money')||x.includes('bill')||x.includes('tax')?'money':x.includes('map')||x.includes('near')||x.includes('atm')?'nearby':x.includes('market')||x.includes('price')?'markets':x.includes('football')||x.includes('sport')?'football':x.includes('news')||x.includes('trend')?'news':x.includes('safaricom')||x.includes('bundle')||x.includes('mpesa')?'safaricom':x.includes('government')||x.includes('passport')||x.includes('id')?'services':'one';go(map)}
+function converterTool(){const v=prompt('Enter conversion, e.g. 5 km to miles, 2 kg to lb, 25 C to F');if(!v)return;_ask('Convert this accurately and show the calculation: '+v);}
+function dateTool(){const q=prompt('What do you want to calculate? e.g. age from 2008-05-10, days until 2027-01-01');if(!q)return;_ask('Help me calculate this date/time question accurately: '+q);}
+function openCalc(){if($('calcModal')){$('calcModal').classList.add('show');renderCalc();return}document.body.insertAdjacentHTML('beforeend',`<div id="calcModal" class="modal"><div class="sheet"><button class="close" onclick="$('calcModal').classList.remove('show')">✕</button><h2>🧮 Calculator</h2><div id="calcDisplay" class="calc-display">0</div><div class="calc-grid"><button onclick="calcKey('MC')">MC</button><button onclick="calcKey('MR')">MR</button><button onclick="calcKey('M-')">M−</button><button onclick="calcKey('M+')">M+</button><button onclick="calcKey('C')">C</button><button onclick="calcKey('⌫')">⌫</button><button onclick="calcKey('%')">%</button><button onclick="calcKey('/')">÷</button><button onclick="calcKey('7')">7</button><button onclick="calcKey('8')">8</button><button onclick="calcKey('9')">9</button><button onclick="calcKey('*')">×</button><button onclick="calcKey('4')">4</button><button onclick="calcKey('5')">5</button><button onclick="calcKey('6')">6</button><button onclick="calcKey('-')">−</button><button onclick="calcKey('1')">1</button><button onclick="calcKey('2')">2</button><button onclick="calcKey('3')">3</button><button onclick="calcKey('+')">+</button><button onclick="calcKey('0')">0</button><button onclick="calcKey('.')">.</button><button onclick="calcKey('(')">(</button><button onclick="calcKey(')')">)</button><button onclick="calcKey('sqrt')">√</button><button onclick="calcKey('neg')">±</button><button style="grid-column:span 2" onclick="calcEquals()">=</button></div><p class="small-note">Supports +, −, ×, ÷, %, brackets, square root and memory. Enter/Backspace also work.</p></div></div>`);document.addEventListener('keydown',calcKeyboard);renderCalc()}
+function calcKeyboard(e){if(!$('calcModal')||!$('calcModal').classList.contains('show'))return;if(/[0-9+\-*/().%]/.test(e.key))calcKey(e.key);else if(e.key==='Enter')calcEquals();else if(e.key==='Backspace')calcKey('⌫');else if(e.key==='Escape')$('calcModal').classList.remove('show')}
+function calcKey(k){if(k==='C')calcState.expr='';else if(k==='⌫')calcState.expr=calcState.expr.slice(0,-1);else if(k==='M+')calcState.memory+=safeEval(calcState.expr)||0;else if(k==='M-')calcState.memory-=safeEval(calcState.expr)||0;else if(k==='MR')calcState.expr+=String(calcState.memory);else if(k==='MC')calcState.memory=0;else if(k==='sqrt')calcState.expr+='sqrt(';else if(k==='neg')calcState.expr=calcState.expr?'(-'+calcState.expr+')':'-';else calcState.expr+=k;renderCalc()}
+function renderCalc(){if($('calcDisplay'))$('calcDisplay').textContent=calcState.expr||'0'}
+function safeEval(raw){let s=String(raw||'').replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-').replace(/sqrt\(/g,'r(');if(!/^[0-9+*/().%\s\-r]+$/.test(s)||!/^[0-9+*/().%\s\-r]+$/.test(s))throw Error('Invalid');s=s.replace(/(\d+(?:\.\d+)?)%/g,'($1/100)');let toks=s.match(/r|\d+(?:\.\d+)?|[()+\-*/]/g)||[];let i=0;function primary(){let t=toks[i++];if(t==='r')return Math.sqrt(primary());if(t==='('){let v=expr();if(toks[i++]!==')')throw Error('Bracket');return v}if(t==='-')return-primary();if(t==='+' )return primary();if(t==null)throw Error('Value');let n=Number(t);if(!Number.isFinite(n))throw Error('Number');return n}function term(){let v=primary();while(i<toks.length&&/[*/]/.test(toks[i])){let op=toks[i++],b=primary();if(op==='*')v*=b;else{if(b===0)throw Error('Divide by zero');v/=b}}return v}function expr(){let v=term();while(i<toks.length&&/[+-]/.test(toks[i])){let op=toks[i++],b=term();v=op==='+'?v+b:v-b}return v}let out=expr();if(i!==toks.length||!Number.isFinite(out))throw Error('Invalid');return out}
+function calcEquals(){try{let v=safeEval(calcState.expr);calcState.expr=String(Number(v.toFixed(12)));renderCalc()}catch(e){toast('Invalid calculation')}}
+
+function askNum(label,def=''){let v=prompt(label,def);if(v===null||v.trim()==='')return null;let n=Number(v);return Number.isFinite(n)?n:null}
+function budgetTool(){let income=askNum('Monthly income (KES)');if(income===null)return;let needs=income*.5,savings=income*.2,flex=income*.3;alert(`Suggested monthly plan\nNeeds: KSh ${needs.toFixed(0)}\nSavings/debt: KSh ${savings.toFixed(0)}\nFlexible: KSh ${flex.toFixed(0)}`)}
+function loanTool(){let p=askNum('Loan amount (KES)');if(p===null)return;let r=askNum('Annual interest rate (%)','12');let n=askNum('Months','12');if(r===null||n===null)return;let m=(r/100)/12;let pay=m? p*m*Math.pow(1+m,n)/(Math.pow(1+m,n)-1):p/n;alert(`Estimated monthly payment: KSh ${pay.toFixed(2)}\nTotal repayment: KSh ${(pay*n).toFixed(2)}\nInterest: KSh ${(pay*n-p).toFixed(2)}`)}
+function salaryTool(){let gross=askNum('Gross monthly salary (KES)');if(gross===null)return;let pension=Math.min(gross*.06,18000), taxable=Math.max(0,gross-pension);let estTax=taxable<=24000?taxable*.1:taxable<=32333?2400+(taxable-24000)*.25:taxable<=500000?4483.25+(taxable-32333)*.3:144?0:0;let net=gross-pension-estTax;alert(`Planning estimate only\nGross: KSh ${gross.toFixed(0)}\nPension estimate: KSh ${pension.toFixed(0)}\nEstimated PAYE: KSh ${estTax.toFixed(0)}\nEstimated net: KSh ${net.toFixed(0)}\nVerify current KRA rules before relying on it.`)}
+function savingsTool(){let target=askNum('Savings target (KES)');let months=askNum('Months');if(target===null||months===null)return;alert(`Save about KSh ${(target/months).toFixed(2)} per month.`)}
+function rentTool(){let income=askNum('Monthly take-home income (KES)');if(income===null)return;alert(`Suggested rent ceiling (30%): KSh ${(income*.3).toFixed(0)} per month.`)}
+function investmentTool(){let start=askNum('Starting amount (KES)','0')||0,monthly=askNum('Monthly contribution (KES)','1000')||0,rate=askNum('Annual return (%)','8')||0,years=askNum('Years','5')||0;let m=rate/100/12,n=years*12;let fv=m?start*Math.pow(1+m,n)+monthly*(Math.pow(1+m,n)-1)/m:start+monthly*n;alert(`Estimated future value: KSh ${fv.toFixed(2)}\nThis is an illustration, not investment advice.`)}
+function weatherTool(){let place=prompt('Kenyan town/county','Nairobi');if(place)window.open('https://www.google.com/search?q='+encodeURIComponent('weather '+place+' Kenya'),'_blank')}
+function transportTool(){let place=prompt('Route or destination','Nairobi CBD');if(place)window.open('https://www.google.com/maps/search/'+encodeURIComponent(place+' Kenya'),'_blank')}
+function housingTool(){let place=prompt('Town/area','Nairobi');if(place)window.open('https://www.google.com/search?q='+encodeURIComponent('houses for rent '+place+' Kenya'),'_blank')}
+function emergencyTool(){alert('Kenya emergency numbers\n999 — Police/Ambulance/Fire\n112 — National emergency number\nFor immediate danger, call your local emergency service.');window.open('https://www.google.com/maps/search/hospital+near+me','_blank')}
+function openSettings(){let m=$('settingsModal');if(m)m.classList.add('show');syncThemeSwitch()}
+function closeSettings(){let m=$('settingsModal');if(m)m.classList.remove('show')}
+function toggleTheme(){let dark=document.body.classList.toggle('dark');localStorage.setItem('uniknya_theme',dark?'dark':'light');document.querySelector('meta[name="theme-color"]').setAttribute('content',dark?'#0b1411':'#075f43');syncThemeSwitch()}
+function syncThemeSwitch(){let b=$('themeSwitch');if(b){let d=document.body.classList.contains('dark');b.classList.toggle('on',d);b.setAttribute('aria-pressed',d)}}
+function resetPreferences(){localStorage.removeItem('uniknya_theme');localStorage.removeItem('uniknya_alerts');document.body.classList.remove('dark');syncThemeSwitch();toast('Preferences reset')}
+(function(){if(localStorage.getItem('uniknya_theme')==='dark')document.body.classList.add('dark')})()
+
+if(currentUser()){showApp();setTimeout(()=>{renderGoodsPriceBoard();startMarketAutoRefresh();startNewsAutoRefresh()},500)}
+renderSafaricomBundles();
+</script>
+<div id="safBuyModal" class="modal"><div class="sheet"><button class="close" onclick="closeSafaricomBuy()">×</button><div class="eyebrow">SAFARICOM • M-PESA CHECKOUT</div><h2 id="safBuyTitle">Buy bundle</h2><p id="safBuyMeta" style="color:var(--muted)"></p><div class="card"><label>M-PESA phone number</label><input id="safPhone" inputmode="tel" placeholder="0712 345 678" autocomplete="tel"><p style="font-size:12px;color:var(--muted)">After you confirm, Safaricom can send an M-PESA payment prompt to this phone. You enter your M-PESA PIN only on your phone.</p><button id="safConfirmBtn" onclick="confirmSafaricomBuy()">Confirm & send M-PESA prompt</button><div id="safBuyStatus" style="display:none;margin-top:10px;color:#b42318;font-size:12px"></div></div><button class="outline-btn" onclick="closeSafaricomBuy()">Cancel</button></div></div>
+
+<style>
+/* UNIKENYA ONE — unified super-app layer */
+.one-wrap{max-width:1100px;margin:auto}.one-hero{padding:18px;border-radius:24px;background:linear-gradient(135deg,#063b2c,#0b7b55);color:#fff;box-shadow:0 14px 35px rgba(0,0,0,.18)}
+.one-search{display:flex;gap:8px;margin-top:14px}.one-search input{flex:1;min-width:0;padding:15px 16px;border:0;border-radius:16px;font-size:16px}.one-search button{border:0;border-radius:15px;padding:0 16px;font-size:20px;cursor:pointer}.one-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin-top:14px}.one-card{padding:15px;border-radius:18px;background:var(--card,#fff);border:1px solid rgba(0,0,0,.07);box-shadow:0 5px 18px rgba(0,0,0,.06);cursor:pointer}.dark .one-card{background:#13211d;border-color:#284038}.one-card b{display:block;margin:5px 0}.one-card small{color:var(--muted)}.one-result{margin-top:14px}.one-section{margin-top:16px}.one-title{display:flex;justify-content:space-between;align-items:center;gap:8px}.one-pills{display:flex;gap:7px;overflow:auto;padding:8px 0}.one-pill{white-space:nowrap;border:1px solid rgba(0,0,0,.12);background:transparent;padding:8px 12px;border-radius:999px;cursor:pointer}.one-list{display:grid;gap:8px}.one-row{padding:13px;border-radius:15px;background:var(--card,#fff);border:1px solid rgba(0,0,0,.07)}.dark .one-row{background:#13211d}.one-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.one-actions button{padding:9px 12px;border-radius:11px;border:0;cursor:pointer}.sos{background:#a00!important;color:#fff}.one-stat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.one-stat div{padding:12px;border-radius:15px;background:rgba(255,255,255,.12)}
+</style>
+<section id="one" class="screen">
+<div class="one-wrap">
+ <div class="one-hero">
+  <div class="eyebrow">UNIKENYA ONE • EVERYTHING IN ONE PLACE</div>
+  <h2 style="margin:5px 0">🇰🇪 Your Kenyan Super Centre</h2>
+  <p>Ask, search, buy, learn, work, travel, manage money, find services and handle everyday tasks from one command centre.</p>
+  <div class="one-search"><input id="oneSearch" placeholder="What do you need? e.g. job in Kisumu, 1GB bundle, hospital near me…" onkeydown="if(event.key==='Enter')oneSearchNow()"><button onclick="oneVoice()" title="Voice search">🎙️</button><button onclick="oneSearchNow()">⌕</button></div>
+  <div class="one-stat"><div><b id="oneAlertCount">0</b><small> alerts</small></div><div><b id="oneSavedCount">0</b><small> saved</small></div><div><b>Kim</b><small> AI ready</small></div></div>
+ </div>
+ <div id="oneResult" class="one-result"></div>
+ <div class="one-section"><div class="one-title"><h3>⚡ Everything you can do</h3><button class="outline-btn" onclick="oneEmergency()">🚨 SOS</button></div>
+  <div class="one-grid">
+   <div class="one-card" onclick="go('services')"><span>🏛️</span><b>Government</b><small>eCitizen, KRA, NTSA, SHA, HELB & counties</small></div>
+   <div class="one-card" onclick="go('jobs')"><span>💼</span><b>Jobs & Career</b><small>Jobs, gigs, CVs, interviews & alerts</small></div>
+   <div class="one-card" onclick="go('schools')"><span>📚</span><b>Education</b><small>Courses, scholarships, tutoring & revision</small></div>
+   <div class="one-card" onclick="go('money')"><span>💰</span><b>Money</b><small>Budget, savings, loans, bills & M-PESA</small></div>
+   <div class="one-card" onclick="go('safaricom')"><span>📱</span><b>Safaricom</b><small>Data, minutes, SMS, offers & checkout</small></div>
+   <div class="one-card" onclick="go('tools');setTimeout(()=>housingTool(),100)"><span>🏠</span><b>Housing</b><small>Rent, property, land & affordability</small></div>
+   <div class="one-card" onclick="go('health')"><span>🚑</span><b>Health & Safety</b><small>Hospitals, pharmacies, first aid & SOS</small></div>
+   <div class="one-card" onclick="go('nearby')"><span>📍</span><b>Nearby & Maps</b><small>Places, directions, traffic & services</small></div>
+   <div class="one-card" onclick="go('markets')"><span>📈</span><b>Markets</b><small>Prices, forex, fuel & economic data</small></div>
+   <div class="one-card" onclick="go('news')"><span>📰</span><b>Kenya Now</b><small>News, football, music & trends</small></div>
+   <div class="one-card" onclick="farmPlannerTool()"><span>🌾</span><b>Farming</b><small>Crops, pests, weather & markets</small></div>
+   <div class="one-card" onclick="businessTool()"><span>🚀</span><b>Business</b><small>Plans, marketing, sellers & marketplace</small></div>
+   <div class="one-card" onclick="go('rights')"><span>⚖️</span><b>Legal & Rights</b><small>Guidance, complaints & letters</small></div>
+   <div class="one-card" onclick="oneTools()"><span>🧰</span><b>Super Tools</b><small>Calculators, documents & planners</small></div>
+   <div class="one-card" onclick="travelTool()"><span>🗺️</span><b>Travel</b><small>Routes, places, stays & planning</small></div>
+   <div class="one-card" onclick="scamTool()"><span>🛡️</span><b>Scam Check</b><small>Protect yourself before paying</small></div>
+  </div>
+ </div>
+ <div class="one-section"><div class="one-title"><h3>🚀 UNIKENYA Mega Hub</h3><span class="badge">Everything</span></div><div class="mega-grid">
+<div class="mega" onclick="travelTool()">🧳<b>Travel</b><small>Trips, routes, budgets</small></div><div class="mega" onclick="marketplaceTool()">🛍️<b>Marketplace</b><small>Buy • sell • compare</small></div><div class="mega" onclick="businessTool()">🏢<b>Business</b><small>Start • register • grow</small></div><div class="mega" onclick="utilitiesTool()">💡<b>Utilities</b><small>Power • water • bills</small></div><div class="mega" onclick="scamTool()">🛡️<b>Scam Check</b><small>Messages • links • offers</small></div><div class="mega" onclick="documentChecklistTool()">🪪<b>Documents</b><small>Checklists & applications</small></div><div class="mega" onclick="reminderTool()">🗓️<b>Reminders</b><small>Local task alerts</small></div><div class="mega" onclick="farmPlannerTool()">🧑‍🌾<b>Farming</b><small>Crops • inputs • markets</small></div><div class="mega" onclick="lifePlannerTool()">🧠<b>Life Planner</b><small>Goals & routines</small></div><div class="mega" onclick="contactTool()">📞<b>Contacts</b><small>Official help lines</small></div><div class="mega" onclick="notesTool()">📝<b>Notes</b><small>Saved ideas</small></div><div class="mega" onclick="serviceNavigator()">🧭<b>Navigator</b><small>Find the right tool</small></div><div class="mega" onclick="converterTool()">🧮<b>Converter</b><small>Everyday units</small></div><div class="mega" onclick="dateTool()">⏱️<b>Date & Time</b><small>Plan & calculate</small></div><div class="mega" onclick="privacyTool()">🔐<b>Privacy</b><small>Protect your data</small></div><div class="mega" onclick="shareApp()">📤<b>Share</b><small>Invite others</small></div>
+</div></div>
+<div class="one-section"><h3>🔔 Smart alerts & personal tools</h3><div class="one-grid">
+  <div class="one-card" onclick="oneAlert('Job Alerts');localStorage.setItem('uniknya_alert_jobs','1');toast('Job alerts enabled')">🔔 <b>Job Alerts</b><small>Watch matching opportunities</small></div>
+  <div class="one-card" onclick="oneAlert('Price Watch');const p=prompt('Product to watch?');if(p){let a=JSON.parse(localStorage.getItem('uniknya_price_watch')||'[]');a.push({item:p,date:new Date().toISOString()});localStorage.setItem('uniknya_price_watch',JSON.stringify(a));toast('Price watch saved')}">💸 <b>Price Watch</b><small>Know when prices move</small></div>
+  <div class="one-card" onclick="weatherTool()">🌦️ <b>Weather Alerts</b><small>Rain and travel warnings</small></div>
+  <div class="one-card" onclick="oneSaved()">⭐ <b>Saved Items</b><small>Jobs, places, properties & services</small></div>
+ </div></div>
+ <div class="one-section"><h3>🛒 UNIKENYA Marketplace</h3><div class="one-row"><b>Buy • Sell • Compare • Discover</b><p>Products, property, cars, local services and opportunities can live in one marketplace.</p><div class="one-actions"><button onclick="oneAsk('Help me create a marketplace listing')">＋ Sell something</button><button onclick="oneAsk('Help me find something to buy in Kenya')">🔎 Find something</button><button onclick="oneAsk('Compare prices for this item in Kenya')">⚖️ Compare</button></div></div></div>
+ <div class="one-section"><h3>🚨 Emergency Centre</h3><div class="one-row"><b>999 / 112</b><p>Quick access to emergency calling, location sharing and nearby emergency services. UNIKENYA never asks for an M-PESA PIN or OTP.</p><div class="one-actions"><button class="sos" onclick="oneEmergency()">CALL EMERGENCY</button><button onclick="oneLocation()">📍 Share location</button><button onclick="oneAsk('Give me basic first aid guidance')">🩹 First aid</button></div></div></div>
+</div></section>
+<style> .mega-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 18px}.mega{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:5px;cursor:pointer;min-height:92px;box-shadow:var(--shadow)}.mega b{font-size:13px}.mega small{color:var(--muted);font-size:10px;line-height:1.35}@media(max-width:700px){.mega-grid{grid-template-columns:repeat(2,1fr)}} </style>
+<script>
+const ONE_API=window.UNIKENYA_API_BASE||location.origin;
+function homeSearchNow(){const q=(document.getElementById('homeSearch')||{}).value?.trim();if(!q)return;oneAsk(q);go('one')}
+function homeAsk(q){const x=document.getElementById('homeSearch');if(x)x.value=q;oneAsk(q);go('one')}
+function oneSearchNow(){const q=(document.getElementById('oneSearch')||{}).value?.trim();if(!q)return;oneAsk(q)}
+function oneAsk(q){const r=document.getElementById('oneResult');r.innerHTML='<div class="one-row"><b>Kim is working…</b><p>Finding the best UNIKENYA action for: '+oneEsc(q)+'</p></div>';fetch(ONE_API+'/api/kim',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q,history:[]})}).then(async x=>{const j=await x.json();if(!x.ok)throw Error(j.detail||'Kim unavailable');r.innerHTML='<div class="one-row"><b>Kim</b><p>'+oneFormat(j.answer||'No answer')+'</p><div class="one-actions"><button onclick="oneSaveText()">⭐ Save</button><button onclick="oneSearchFollow()">🔎 Continue</button></div></div>'}).catch(e=>{r.innerHTML='<div class="one-row"><b>Kim is offline</b><p>'+oneEsc(e.message)+'</p><small>Connect the hosted UNIKENYA backend to enable live AI.</small></div>'})}
+function oneEsc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function oneFormat(s){return oneEsc(s).replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<b>$1</b>')}
+function oneVoice(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return toast('Voice input is not supported here');const x=new SR();x.lang='en-KE';x.onresult=e=>{document.getElementById('oneSearch').value=e.results[0][0].transcript;oneSearchNow()};x.start()}
+function oneEmergency(){if(confirm('Call Kenya emergency services?')){window.location.href='tel:112'}}
+function oneLocation(){if(!navigator.geolocation)return toast('Location unavailable');navigator.geolocation.getCurrentPosition(p=>{const u='https://www.google.com/maps/search/?api=1&query='+p.coords.latitude+','+p.coords.longitude;navigator.clipboard?.writeText(u);window.open(u,'_blank')},()=>toast('Location permission was not granted'))}
+function oneTools(){try{go('tools')}catch(e){toast('Open Super Tools from the menu')}}
+function oneAlert(t){toast(t)}
+function oneSaved(){const n=Number(localStorage.getItem('uniknya_saved_count')||0);toast('Saved items: '+n)}
+function oneSaveText(){localStorage.setItem('uniknya_saved_count',Number(localStorage.getItem('uniknya_saved_count')||0)+1);document.getElementById('oneSavedCount').textContent=localStorage.getItem('uniknya_saved_count');toast('Saved to UNIKENYA')}
+function oneSearchFollow(){document.getElementById('oneSearch')?.focus()}
+(function(){document.getElementById('oneSavedCount').textContent=localStorage.getItem('uniknya_saved_count')||0;document.getElementById('oneAlertCount').textContent=localStorage.getItem('uniknya_alert_count')||0})()
+</script>
+
+</body>
+</html>

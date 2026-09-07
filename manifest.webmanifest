@@ -1,0 +1,10 @@
+{
+  "name": "UNIKENYA — Super Citizen",
+  "short_name": "UNIKENYA",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f3f7f5",
+  "theme_color": "#075f43",
+  "description": "A Kenyan citizen command centre for government services, Kim AI, news, markets, jobs, learning, health, maps and daily tools.",
+  "icons": []
+}

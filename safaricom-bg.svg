@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#007a4d"/><stop offset=".55" stop-color="#00a65a"/><stop offset="1" stop-color="#004d35"/></linearGradient><pattern id="p" width="90" height="90" patternUnits="userSpaceOnUse"><circle cx="45" cy="45" r="2" fill="#fff" opacity=".16"/><path d="M10 70 Q45 25 80 70" fill="none" stroke="#fff" opacity=".06" stroke-width="4"/></pattern></defs>
+<rect width="1600" height="900" fill="url(#g)"/><rect width="1600" height="900" fill="url(#p)"/>
+<circle cx="1320" cy="180" r="260" fill="#fff" opacity=".07"/><circle cx="1320" cy="180" r="170" fill="none" stroke="#fff" opacity=".12" stroke-width="28"/>
+<rect x="1180" y="80" width="260" height="460" rx="38" fill="#fff" opacity=".12" stroke="#fff" stroke-opacity=".3" stroke-width="4"/>
+<rect x="1220" y="145" width="180" height="300" rx="16" fill="#fff" opacity=".1"/>
+<path d="M1260 380h100M1280 405h60" stroke="#fff" stroke-width="14" stroke-linecap="round" opacity=".65"/>
+<text x="90" y="180" font-family="Arial,sans-serif" font-size="92" font-weight="800" fill="#fff">Safaricom</text>
+<text x="96" y="250" font-family="Arial,sans-serif" font-size="38" fill="#fff" opacity=".9">Data • Minutes • SMS • M-PESA</text>
+<text x="96" y="790" font-family="Arial,sans-serif" font-size="28" fill="#fff" opacity=".65">UNIKENYA Safaricom Deals Centre</text>
+</svg>
