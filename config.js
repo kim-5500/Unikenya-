@@ -1,2 +1,2 @@
 // Set this to your deployed HTTPS backend URL before release, e.g. https://api.example.com
-window.UNIKENYA_API_BASE = 'https://unikenya.onrender.com';
+window.UNIKENYA_API_BASE = 'https://unikenya-n7dw.onrender.com';
