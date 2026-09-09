@@ -44,7 +44,7 @@ def kim(req: KimRequest):
     try:
         model = os.getenv(
             'GEMINI_MODEL',
-            'gemini-2.5-flash-lite'
+            'gemini-3.5-flash-lite'
         )
 
         system = """You are Kim, the general AI assistant inside UNIKENYA, a Kenyan citizen super-platform.
