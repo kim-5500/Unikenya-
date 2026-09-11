@@ -1,6 +1,7 @@
 import os
 import re
 import html as htmlmod
+import base64
 from datetime import datetime, timezone
 from xml.etree import ElementTree as ET
 
@@ -53,46 +54,68 @@ def kim(req: KimRequest):
 
     model = os.getenv(
         "GEMINI_MODEL",
-        "gemini-3.5-flash-lite"
+        "gemini-3.1-flash-lite"
     )
 
     system_instruction = """
 You are Kim, the general AI assistant inside UNIKENYA,
 a Kenyan citizen super-platform.
 
-Be helpful with:
-- general questions
-- coding
-- mathematics
-- writing
-- science
-- education
-- careers
-- business
-- planning
-- research
-- everyday questions
+You are helpful across:
+
+- General questions
+- Coding
+- Mathematics
+- Writing
+- Science
+- Education
+- Careers
+- Business
+- Planning
+- Research
+- Technology
+- Everyday questions
+- Kenyan information
 
 For Kenya-specific government services:
+
 - Prefer official Kenyan sources when known.
 - Never claim access to private citizen records.
-- Never ask for passwords, M-PESA PINs or OTPs.
+- Never ask for passwords.
+- Never ask for M-PESA PINs.
+- Never ask for OTPs.
+- Never pretend to have completed a government transaction
+  unless the connected service actually confirms it.
 
-When information may have changed recently, tell the user
-that it should be verified.
+When information may have changed recently,
+tell the user that it should be verified.
 
-Give practical and clear answers.
+Give practical, clear and useful answers.
+
 Keep answers concise unless the user asks for detail.
+
+If the user asks something you cannot know,
+say so instead of inventing information.
+
+You are Kim, the AI assistant of UNIKENYA.
 """
+
 
     try:
 
-        # Build conversation text from previous messages.
-        conversation = system_instruction.strip() + "\n\n"
+        # ----------------------------------------------------
+        # BUILD CONVERSATION
+        # ----------------------------------------------------
+
+        conversation = (
+            system_instruction.strip()
+            + "\n\n"
+        )
 
         for item in req.history[-10:]:
 
             role = item.get("role")
+
             content = str(
                 item.get("content", "")
             ).strip()
@@ -101,16 +124,18 @@ Keep answers concise unless the user asks for detail.
                 continue
 
             if role == "user":
+
                 conversation += (
                     "USER:\n"
-                    + content
+                    + content[:12000]
                     + "\n\n"
                 )
 
             elif role == "assistant":
+
                 conversation += (
                     "KIM:\n"
-                    + content
+                    + content[:12000]
                     + "\n\n"
                 )
 
@@ -119,7 +144,11 @@ Keep answers concise unless the user asks for detail.
             + req.message[:12000]
         )
 
-        # Gemini Interactions API
+
+        # ----------------------------------------------------
+        # GEMINI INTERACTIONS API
+        # ----------------------------------------------------
+
         url = (
             "https://generativelanguage.googleapis.com"
             "/v1beta/interactions"
@@ -141,14 +170,23 @@ Keep answers concise unless the user asks for detail.
             timeout=60
         )
 
+
+        # ----------------------------------------------------
+        # READ RESPONSE
+        # ----------------------------------------------------
+
         try:
             data = response.json()
         except Exception:
             data = {}
 
+
         if response.status_code >= 400:
 
-            error = data.get("error", {})
+            error = data.get(
+                "error",
+                {}
+            )
 
             message = (
                 error.get("message")
@@ -161,12 +199,23 @@ Keep answers concise unless the user asks for detail.
                 message
             )
 
-        # Normal Interactions API response
+
+        # ----------------------------------------------------
+        # NORMAL OUTPUT
+        # ----------------------------------------------------
+
         answer = str(
-            data.get("output_text", "")
+            data.get(
+                "output_text",
+                ""
+            )
         ).strip()
 
-        # Fallback parser in case output_text is not returned.
+
+        # ----------------------------------------------------
+        # FALLBACK OUTPUT PARSER
+        # ----------------------------------------------------
+
         if not answer:
 
             steps = data.get(
@@ -178,7 +227,10 @@ Keep answers concise unless the user asks for detail.
 
             for step in steps:
 
-                if step.get("type") != "model_output":
+                if step.get(
+                    "type"
+                ) != "model_output":
+
                     continue
 
                 content = step.get(
@@ -186,64 +238,88 @@ Keep answers concise unless the user asks for detail.
                     []
                 )
 
-                if isinstance(content, str):
-                    collected.append(content)
+                if isinstance(
+                    content,
+                    str
+                ):
 
-                elif isinstance(content, list):
+                    collected.append(
+                        content
+                    )
+
+                elif isinstance(
+                    content,
+                    list
+                ):
 
                     for part in content:
 
-                        if isinstance(part, dict):
+                        if not isinstance(
+                            part,
+                            dict
+                        ):
+                            continue
 
-                            text = part.get(
-                                "text",
-                                ""
+                        text = part.get(
+                            "text",
+                            ""
+                        )
+
+                        if text:
+                            collected.append(
+                                str(text)
                             )
-
-                            if text:
-                                collected.append(
-                                    str(text)
-                                )
 
             answer = "".join(
                 collected
             ).strip()
 
+
         if not answer:
+
             raise HTTPException(
                 502,
                 "Gemini returned an empty answer"
             )
+
 
         return {
             "answer": answer,
             "model": model
         }
 
+
     except HTTPException:
         raise
 
+
     except requests.Timeout:
+
         raise HTTPException(
             504,
             "Kim took too long to respond. Please try again."
         )
 
+
     except requests.RequestException:
+
         raise HTTPException(
             502,
             "Unable to connect to Gemini."
         )
 
+
     except Exception as e:
+
         raise HTTPException(
             502,
-            f"Kim backend error: {type(e).__name__}"
+            "Kim backend error: "
+            + type(e).__name__
         )
 
 
 # ============================================================
-# HEALTH
+# HEALTH CHECK
 # ============================================================
 
 @app.get("/health")
@@ -316,21 +392,31 @@ def rss_items(
         )
 
         description = clean_text(
-            item.findtext("description")
+            item.findtext(
+                "description"
+            )
         )[:240]
 
         published = clean_text(
-            item.findtext("pubDate")
+            item.findtext(
+                "pubDate"
+            )
         )
 
         if title and link:
 
             output.append({
+
                 "title": title,
+
                 "url": link,
+
                 "summary": description,
+
                 "source": source,
+
                 "category": category,
+
                 "published": published
             })
 
@@ -344,8 +430,11 @@ def rss_items(
 class MpesaRequest(BaseModel):
 
     phone: str
+
     amount: int
+
     reference: str = "UNIKENYA"
+
     description: str = "UNIKENYA purchase"
 
 
@@ -372,8 +461,6 @@ def mpesa_base():
 
 def mpesa_token():
 
-    import base64
-
     key = os.getenv(
         "MPESA_CONSUMER_KEY"
     )
@@ -394,13 +481,14 @@ def mpesa_token():
     ).decode()
 
     response = requests.get(
+
         mpesa_base()
         + "/oauth/v1/generate"
         + "?grant_type=client_credentials",
 
         headers={
             "Authorization":
-            "Basic " + credentials
+                "Basic " + credentials
         },
 
         timeout=TIMEOUT
@@ -418,8 +506,6 @@ def mpesa_stkpush(
     req: MpesaRequest
 ):
 
-    import base64
-
     phone = re.sub(
         r"\D",
         "",
@@ -427,13 +513,16 @@ def mpesa_stkpush(
     )
 
     if phone.startswith("0"):
+
         phone = (
             "254"
             + phone[1:]
         )
 
     if phone.startswith("+"):
+
         phone = phone[1:]
+
 
     if not re.fullmatch(
         r"2547\d{8}",
@@ -445,12 +534,17 @@ def mpesa_stkpush(
             "Use a valid Kenyan Safaricom number, e.g. 0712345678"
         )
 
-    if req.amount < 1 or req.amount > 150000:
+
+    if (
+        req.amount < 1
+        or req.amount > 150000
+    ):
 
         raise HTTPException(
             400,
             "Amount must be between KSh 1 and KSh 150,000"
         )
+
 
     shortcode = os.getenv(
         "MPESA_SHORTCODE"
@@ -464,6 +558,7 @@ def mpesa_stkpush(
         "MPESA_CALLBACK_URL"
     )
 
+
     if (
         not shortcode
         or not passkey
@@ -475,9 +570,11 @@ def mpesa_stkpush(
             "Safaricom STK configuration is incomplete on the server"
         )
 
+
     timestamp = datetime.now().strftime(
         "%Y%m%d%H%M%S"
     )
+
 
     password = base64.b64encode(
         (
@@ -486,6 +583,7 @@ def mpesa_stkpush(
             + timestamp
         ).encode()
     ).decode()
+
 
     payload = {
 
@@ -533,6 +631,7 @@ def mpesa_stkpush(
             or "UNIKENYA"
     }
 
+
     try:
 
         token = mpesa_token()
@@ -545,6 +644,7 @@ def mpesa_stkpush(
             json=payload,
 
             headers={
+
                 "Authorization":
                     "Bearer " + token,
 
@@ -555,11 +655,20 @@ def mpesa_stkpush(
             timeout=TIMEOUT
         )
 
-        data = response.json()
+
+        try:
+
+            data = response.json()
+
+        except Exception:
+
+            data = {}
+
 
         if response.status_code >= 400:
 
             raise HTTPException(
+
                 response.status_code,
 
                 data.get(
@@ -571,15 +680,21 @@ def mpesa_stkpush(
                 or "Safaricom rejected the request"
             )
 
+
         return data
 
+
     except HTTPException:
+
         raise
+
 
     except Exception as e:
 
         raise HTTPException(
+
             502,
+
             "Safaricom payment request failed: "
             + type(e).__name__
         )
@@ -591,8 +706,12 @@ def mpesa_callback(
 ):
 
     return {
-        "ResultCode": 0,
-        "ResultDesc": "Accepted"
+
+        "ResultCode":
+            0,
+
+        "ResultDesc":
+            "Accepted"
     }
 
 
@@ -630,7 +749,9 @@ def news():
         )
     ]
 
+
     items = []
+
 
     for feed, source, category in feeds:
 
@@ -645,7 +766,9 @@ def news():
             )
 
         except Exception:
+
             pass
+
 
     if not items:
 
@@ -653,6 +776,7 @@ def news():
             503,
             "News feeds temporarily unavailable"
         )
+
 
     return {
 
@@ -677,16 +801,23 @@ def parse_table_rows(
 
     from html.parser import HTMLParser
 
-    class Parser(HTMLParser):
+
+    class Parser(
+        HTMLParser
+    ):
 
         def __init__(self):
 
             super().__init__()
 
             self.in_td = False
+
             self.row = []
+
             self.rows = []
+
             self.buffer = ""
+
 
         def handle_starttag(
             self,
@@ -700,11 +831,14 @@ def parse_table_rows(
             ):
 
                 self.in_td = True
+
                 self.buffer = ""
+
 
             elif tag == "tr":
 
                 self.row = []
+
 
         def handle_data(
             self,
@@ -716,6 +850,7 @@ def parse_table_rows(
                 self.buffer += (
                     data + " "
                 )
+
 
         def handle_endtag(
             self,
@@ -738,16 +873,20 @@ def parse_table_rows(
 
                 self.in_td = False
 
+
             elif (
                 tag == "tr"
                 and self.row
             ):
 
-                if any(self.row):
+                if any(
+                    self.row
+                ):
 
                     self.rows.append(
                         self.row[:]
                     )
+
 
     parser = Parser()
 
@@ -758,13 +897,18 @@ def parse_table_rows(
 
 @app.get("/api/markets")
 def markets(
+
     kind: str | None = None,
+
     county: str | None = None,
+
     market: str | None = None,
+
     commodity: str | None = None
 ):
 
     sections = []
+
 
     # --------------------------------------------------------
     # CBK FOREX
@@ -773,38 +917,55 @@ def markets(
     try:
 
         page = requests.get(
+
             "https://www.centralbank.go.ke/forex/",
+
             headers={
                 "User-Agent": UA
             },
+
             timeout=TIMEOUT
         ).text
+
 
         text = clean_text(
             page
         )
 
+
         rates = []
 
+
         for code, label in [
+
             ("USD", "US DOLLAR"),
+
             ("GBP", "STG POUND"),
+
             ("EUR", "EURO")
         ]:
 
             match = re.search(
+
                 rf"{code}[^0-9]{{0,80}}([0-9]+\.[0-9]+)",
+
                 text,
+
                 re.I
             )
+
 
             if match:
 
                 rates.append([
+
                     label,
+
                     match.group(1),
+
                     "KES"
                 ])
+
 
         if rates:
 
@@ -816,120 +977,4 @@ def markets(
                 "source":
                     "Central Bank of Kenya",
 
-                "rows":
-                    rates,
-
-                "note":
-                    "Public CBK page; bank transaction rates may differ."
-            })
-
-    except Exception:
-        pass
-
-    # --------------------------------------------------------
-    # KAMIS
-    # --------------------------------------------------------
-
-    try:
-
-        url = (
-            "https://kamis.kilimo.go.ke/site/market"
-        )
-
-        page = requests.get(
-            url,
-            headers={
-                "User-Agent": UA
-            },
-            timeout=TIMEOUT
-        ).text
-
-        rows = parse_table_rows(
-            page
-        )
-
-        wanted = []
-
-        for row in rows:
-
-            blob = " ".join(
-                row
-            ).lower()
-
-            if (
-                county
-                and county.lower()
-                not in blob
-            ):
-                continue
-
-            if (
-                market
-                and market.lower()
-                not in blob
-            ):
-                continue
-
-            if (
-                commodity
-                and commodity.lower()
-                not in blob
-            ):
-                continue
-
-            wanted.append(
-                row
-            )
-
-        if wanted:
-
-            sections.append({
-
-                "title":
-                    "KAMIS market observations",
-
-                "source":
-                    "Kenya Agricultural Market Information System",
-
-                "rows":
-                    wanted[:30],
-
-                "note":
-                    "Public KAMIS observations. Values vary by market/date."
-            })
-
-    except Exception:
-        pass
-
-    if not sections:
-
-        raise HTTPException(
-            503,
-            "Official market sources temporarily unavailable"
-        )
-
-    return {
-
-        "updated_at":
-            datetime.now(
-                timezone.utc
-            ).isoformat(),
-
-        "sections":
-            sections,
-
-        "filters": {
-
-            "kind":
-                kind,
-
-            "county":
-                county,
-
-            "market":
-                market,
-
-            "commodity":
-                commodity
-        }
-    }
+               
